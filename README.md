@@ -1,17 +1,17 @@
 Fluid Powered TYPO3: Documentation
 ==================================
 
-> Welcome to the documentation collection for the extensions in the Fluid Powered TYPO3 family.
+> Рады видеть Вас на страницах документации по набору расширений Fluid TYPO3.
 
-The documentation collection is divided into the following primary chapters:
+Документация состоит из следующих основных глав:
 
-* [Introduction](Introduction.md)
-  Is a short description of what Fluid Powered TYPO3 is all about - in bullet point form.
-* [Online Services](OnlineServices.md)
-  Contains links to references for ViewHelpers, links to our support chat, links to download packages and generated extensions.
-* [Beginner's Guide](BeginnersGuide.md)
-  Is a book-form guide which can be read from end to end. It teaches you the basic concepts shared by the extensions.
-* [Best Practices](BestPractice/)
+* [Введение](Introduction.md)
+  Краткая характеристика расширений Fluid TYPO3 в форме списка.
+* [Сетевые службы](OnlineServices.md)
+  Ссылки на справку по проекторам - ViewHelpers, ссылки на чат поддержки, ссылки для скачивания пакетов и расширений.
+* [Руководство для начинающих](BeginnersGuide.md)
+  Руководство в форме книги, которую можно прочитать от корки до корки. Здесь говориться о базовых концепциях, справедливых для всех расширений.
+* [Передовой опыт](BestPractice/)
   Is a set of best practices for all areas involved in creating web sites based on Fluid TYPO3 extensions. It contains:
   * [Best practices for Configuration](BestPractice/Configuration.md)
   * [Best practices for Code Building](BestPractice/CodeBuilding.md)
