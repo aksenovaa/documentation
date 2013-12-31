@@ -12,25 +12,25 @@ Fluid Powered TYPO3: Documentation
 * [Руководство для начинающих](BeginnersGuide.md)
   Руководство в форме книги, которую можно прочитать от корки до корки. Здесь говориться о базовых концепциях, справедливых для всех расширений.
 * [Передовой опыт](BestPractice/)
-  Is a set of best practices for all areas involved in creating web sites based on Fluid TYPO3 extensions. It contains:
-  * [Best practices for Configuration](BestPractice/Configuration.md)
-  * [Best practices for Code Building](BestPractice/CodeBuilding.md)
-  * [Best practices for Migrating Resources and Setups](BestPractice/Migration.md)
-  * [Best practices for Content Template Creation](BestPractice/Content.md)
-  * [Best practices for Page Template Creation](BestPractice/Pages.md)
-  * [Best practices for Plugin Integration](BestPractice/Plugins.md)
-* [Guides](Guides/)
-  Is a set of guides for using the Flux API. It contains:
-  * [Guide for using the FormComponent](Guides/FormComponent.md)
-  * [Guide for using language files and translations](Guides/WorkingWithLocallang.md)
-* [Extensions](Extensions.md)
-  Is a more detailed set of documentation about each extension's features, requirements, practices etc.
-* [Concepts](Concepts/)
-  Contains in-depth information about unique concepts Fluid Powered TYPO3 introduces.
-* [Cookbook](Cookbook/)
-  Is a collection of code examples.
-* [Contributing](Contributing/)
-  Is for those of you who wish to contribute code. It describes our workflow and quality expectations.
+  Передовой опыт во всех областях, связанных с созданием сайтов на основе расширений Fluid TYPO3. А именно:
+  * [Советы и рекомендации по Настройкам](BestPractice/Configuration.md)
+  * [Советы и рекомендации по программированию](BestPractice/CodeBuilding.md)
+  * [Советы и рекомендации по миграции ресурсов и настроек (Setups)](BestPractice/Migration.md)
+  * [Советы и рекомендации по созданию шаблонов содержимого (Content Template)](BestPractice/Content.md)
+  * [Советы и рекомендации по созданию шаблонов страниц (Page Template)](BestPractice/Pages.md)
+  * [Советы и рекомендации по интеграции дополнений (Plugin)](BestPractice/Plugins.md)
+* [Руководства](Guides/)
+  Набор руководств по использованию Flux API. А именно:
+  * [Руководство по использованию компонентов форм - FormComponent](Guides/FormComponent.md)
+  * [Руководство по использованию языковых файлов и переводу](Guides/WorkingWithLocallang.md)
+* [Расширения](Extensions.md)
+  Набор подробной документации по функциям, требованиям, опыту в использовании каждого из расширений.
+* [Основные понятия](Concepts/)
+  Развернутая информация по уникальной концепции работы TYPO3 на базе Fluid.
+* [Рецепты](Cookbook/)
+  Набор примеров кода.
+* [Содействие](Contributing/)
+  Для тех из вас, кто хочет внести свой вклад в код. Здесь описана технология и требования к оформлению кода.
 
 ## Contributing to the documentation collection
 
