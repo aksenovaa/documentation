@@ -32,38 +32,37 @@ Fluid Powered TYPO3: Documentation
 * [Содействие](Contributing/)
   Для тех из вас, кто хочет внести свой вклад в код. Здесь описана технология и требования к оформлению кода.
 
-## Contributing to the documentation collection
+## Внесение вклада в коллекцию документации
 
-> Wish to contribute? Have a correction? Great! :)
+> Желаете помочь? Хотите исправить ошибки? Прекрасно! :)
 
-In order to contribute to the documentation you only need to respect a few easily remembered rules:
+Для внесения вклада в документацию необходимо лишь соблюдать несколько простых правил:
 
-1. English is the only language allowed in this documentation - including cookbook recipes.
-2. Respect the folder structure - don't add new folders, with one exception: in the cookbook folders are used to divide recipes
-   into logical groups; if your recipe does not fit into any of the existing groups add one for it. When you do this you are
-   encouraged to add multiple recipes for that group (in order to avoid groups with just one recipe). If your recipe fits into no
-   group at all, use the `Miscellaneous` group along with a descriptive name for the recipe.
-3. Try to use the same wording and sentence structure as the other documentation. Always use the same formatting! Lines are
-   manually wrapped at 130 characters and documentation should be edited using a monospace font.
-4. The official format is Markdown. Do not use other formats!
-5. Make one change at a time. If necessary, create multiple changes (you can then submit them as one pull request).
+1. В текущей документации допустим лишь английский язык, включая и набор примеров кода (рецепты).
+2. Соблюдайте структуру папок, не добавляйте новых, за одним исключением: в папке Cookbook примеры логически разделяются на
+группы; но если приводимый пример не соответствует ни одной из существующих групп, можно добавить еще одну. При этом хорошо бы
+добавить в эту новую группу сразу несколько примеров (а то как-то неудобно хранить в группе лишь один пример). Если же пример не подходит ни под одну группу, используйте для него группу `Miscellaneous` наряду с описательны названием для кода.
+3. Старайтесь использовать те же слова и структуры, как и в другой документации. Всегда используйте то же форматирование!
+Строки ограничены 130 символами, а документация должна использовать моноширинный шрифт.
+4. Официальный формат Markdown. Не используйте другие форматы!
+5. За раз делайте лишь одно изменение. Если нужно, делайте несколько изменений (затем можно объединить их в один pull request).
 
-You will most likely only be adding recipes to the cookbook and correcting the occasional typo, incorrect example or bad wording
-in the main docs. A guide for writing good cookbook recipes can be found in [README.md of the Cookbook section](Cookbook/)
+Скорее всего вы будете добавлять лишь примеры в Рецепты, либо исправлять опечатки, ошибки в примерах или плохие формулировки в
+документации. Руководство по написанию примеров в Рецептах находится в [README.md раздела Рецепты](Cookbook/)
 
-### Contribution how-to
+### Инструкции по содействию
 
-Making changes and new files is easy - you can (like any other repository) clone the repository to your own account, make changes
-as commits and then create pull requests.
+Изменить что-либо или добавить новый файл просто - можно (как и в других репозиториях) клонировать репозиторий в свою учётную
+запись, внести изменения в виде commits, а затем создать pull requests.
 
-The easiest way by far is to use the `Edit` button in the top right hand corner when viewing each file. When you click this button
-the repository is forked to your account - if it has not already bene forked. You then make your changes and add a cover message;
-when you submit this a so-called pull request is made and your change will be evaluated before being merged.
+Проще всего для этого воспользоваться кнопкой `Edit` в правом верхнем углу экрана при просмотре какого-либо файла. По щелчку,
+репозиторий будет отщеплен в Вашу учетную запись, если он уже не был отщеплен. Затем внесите изменения и добавьте
+сопровождающее сообщение; если подтвердить изменения (submit) будет создан так называемый pull request, а изменения будут выверены перед внесением (merged).
 
-When writing your cover message please observe this single rule:
+При написании сопровождающего сообщения, соблюдайте одно простое правило:
 
-> The subject field (on Github, it has a placeholder saying `Update <filename>`) - please fill in this field with a text like
-> `[DOC] Recipe for doing foobar in a baz template`. In other words: always write a subject and always begin it with `[DOC]` and
-> begin the following sentence with a Capital letter. The `[DOC]` prefix is mandatory in this repository but note that other
-> repositories also use other prefixes not described here. Make your subjects descriptive - the worst possible subject is one
-> that just says `Updated <insert filename>` and says nothing about what was actually updated.
+> Поле subject (в Github это шаблон со словами `Update <filename>`) - заполните это поле текстом, вроде
+> `[DOC] Recipe for doing foobar in a baz template`. Другими словами, всегда описывайте тему, начиная с метки `[DOC]` и начинайте
+> последующую фразу с заглавной буквы. Приставка `[DOC]` обязательно для этого репозитория, но помните, что другие репозитории
+> могут использовать другую приставку, здесь не описываемую. Тема должна быть понятной, наихудшая из возможных может быть
+> `Updated <insert filename>`, и ничего не говорящая о том, что реально было сделано и обновлено.
