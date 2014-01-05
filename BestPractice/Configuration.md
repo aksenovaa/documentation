@@ -100,12 +100,12 @@ Fluid в виде "волшебной" переменной шаблона {sett
 
 ### Простой способ регистрации пути к шаблону (Template)
 
-> This method is discouraged as it detaches your template files from an extension scope. You are encouraged to store your files
-> and configuration in an extension - this makes it easier to transport and allows you to use even more conventions to make the
-> actual code you need, smaller, and the usability (for integrators) of your work a lot higher.
+> Этот метод не рекомендуется, так как при этом файлы шаблона отделены от облсти расширения. Лучше хранить файлы и настройки в
+> расширении, таким образо их легче переносить и используется большее число правил для минификации кода,
+> а практичность (для интеграторов) работы становится значительно выше.
 
-To use a dumb path for your templates for example in `fileadmin` simply add the following TypoScript (to your existing TypoScript
-configuration records):
+Для использования альтернативного пути для шаблонов, например в папке `fileadmin` просто добавьте следующий TypoScript (в
+существующую запись шаблона TypoScript):
 
 ```txt
 # for fluidpages template paths
