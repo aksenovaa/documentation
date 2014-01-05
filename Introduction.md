@@ -1,108 +1,91 @@
-## Fluid Powered TYPO3: Introduction
+## TYPO3 на базе Fluid: введение
 
-> Welcome to the brave new world of fully Fluid TYPO3 sites.
+> Добро пожаловать в дивный новый мир сайтов, полностью построенных в TYPO3 на базе Fluid.
 
-Dear reader,
+Дорогой читатель,
 
-Thank you for your interest in the Fluid Powered TYPO3 project!
+Благодарим за интерес, проявленный к проекту TYPO3 на базе Fluid!
 
-It is our hope that you find your new favorite templating workflow in this extension collection. We have tried to expect every
-possible need you might have and deliver ways to achieve your goals in less time than ever before. Our extensions do the boring
-work for you and enable you to focus fully on the templates themselves rather than how you should integrate them into TYPO3.
+Мы надеемся, что вы найдете удобный для себя способ создания шаблонов в этом наборе расширений. Мы пытаемся предугадать все возможные потребности и предоставить способы их решения наиболее простым и кратковременным способом, чем это было прежде. Наши расширения сделают за вас всю скучную работу, позволяя полностью сосредоточиться на самих шаблонах, а не на способах их интеграции в TYPO3.
 
-We do like to compare our extensions as a whole to the long time king of templating in TYPO3, TemplaVoila. However, there are some
-diferences - and assuming you know how TemplaVoila works, the major differences from that to this family of extensions are:
+Нам не хотелось бы сравнивать все эти расширения с царем шаблонирования в TYPO3, TemplaVoila. Тем не менее, хотелось бы отметить некоторые отличия, подразумевая, что вам знакома работа с TemplaVoila. Вот наиболее важные отличия в работе с этим семейством расширений:
 
-* We don't store any form of templates in the database.
-* We don't use template mapping. When you change a template, it's changed - no need for remapping, storing header code and so on.
-* We use TypoScript solely for configuration options, not for creating menus and such - we have ViewHelpers for that.
-* We detect your collection of templates in a filesystem path and simply read all (enabled) files therein as one group.
-* We store backend layout grids, nested content element grids, extra configuration fields and much, much more directly in the
-  individual template files.
-* We use Fluid for everything so that you can use Fluid in everything: for processing labels for your content elements, for
-  generating an icon for a page template, and much more. This includes using your own ViewHelpers.
-* We use a special form strategy which mimics FlexForms, we call this the Flux form. It creates a form inside content or page (or
-  any other type of) record, into which you can insert fields simply by using one ViewHelper tag per field - which is extremely
-  compact compared to traditional FlexForms.
+* Никакие шаблоны и формы не хранятся в базе данных.
+* Разметка шаблона здесь не используется. При изменении шаблона, это сразу же учитывается - нет нужды в переразметке, сохранении кода заголовков и прочему.
+* TypoScript используется исключительно для настроек, а не для создания меню и тому подобного, для всего этого имеются проекторы (ViewHelpers).
+* Вся коллекция шаблонов обнаруживается по указанному пути в файловой системе, просто читаются все (указанные) файлы и рассматриваются как одна группа.
+* Разметка внутреннего макета (backend layout grids), разметка вложенных элементов содержимого, поля дополнительных настроек и многое другое храниться непосредственно в отдельных файлах шаблона.
+* Fluid используется везде: для обработки меток в создаваемых элементах содержимого, для формирования значка шаблона страницы и многого другого, включая использование собственноручно разработанных проекторов (ViewHelpers).
+* Используется специальная стратегия имитации форм настроек - FlexForms, мы называем это формы Flux. Возможно создание форм внутри записей содержимого или страницы (и любых других типах записей), в которые можно запросто внести поля, используя один тег проектора (ViewHelper) для каждого из полей, что чрезвычайно просто в сравнении с традиционными FlexForms.
 
-Fluid itself is an extremely versatile templating language capable of outputting multiple formats and using highly advanced helper
-tags - so-called ViewHelpers - to format and otherwise process output. It contains ways to loop through arrays, make conditions,
-divide templates into smaller Partial templates, use special formatters and much more. Fluid even supports autocompletion when
-you edit it in an editor which supports XSD Schemas and use a namespace in your templates...
+Fluid сам по себе универсальный язык шаблонирования, способный выводить множество форматов и использующий передовые вспомогательные теги, так называемые проекторы - ViewHelpers, для форматирования и различной обработки данных. Существуют возможности перебора массивов, создания условий, разбиения шаблонов на небольшие шаблонные части - Partial, использования специального форматирования и многое другое. Fluid даже поддерживает автозавершение в редакторах с поддержкой схем XSD и использованием областей именования (namespace) в шаблонах...
 
-...and the core concept of all the Fluid Powered TYPO3 extensions is quite simply that one template file becomes one page template
-or content element type or even backend module. When you configure a path to a folder containing such template files, the
-extension responsible for processing that type of template (Content, Page, Backend etc.) parses the file to read things like which
-icon to use, which label to display, how (if any) a Grid should be displayed and any additional fields that should be displayed
-to the editor.
+...и ключевая концепция всех расширений TYPO3 на базе Fluid крайне проста - один и тот же файл шаблона может быть и шаблоном одной страницы, либо определенного типа элемента содержимого, либо даже модуля внутреннего интерфейса. При настройке пути к папке с такими файлами шаблонов, расширение, отвечающее за обработку определенного типа шаблона (содержимого, страницы, внутреннего интерфейса и т. д.) анализирует файл, чтобы определить используемый значок, выводимые метки, вывод (если применимо) в макете (Grid) и дополнительные, выводимые в редакторе поля.
 
-### The new way
+### Новый способ
 
-Fluid Powered TYPO3 encourages a new approach when creating the templating assets for your sites:
+TYPO3 на базе Fluid рекомендует новый подход к созданию шаблонов для сайтов:
 
-* We recommend using an extension to store all your files: templates, icons, images, stylesheets, scripts and all. This approach
-  allows a few clever conventions to do most of the referencing. For example, your LLL files can reside in standard locations and
-  your translation function calls can be much shorter. You can in almost all cases still reference your files using EXT:myext...
-  paths if you need to.
-* We recommend using ViewHelpers in the template when you want to render menus, output content, include styles/scripts and much
-  more - almost everything you used to place in TypoScript you can now place in Fluid templates. Especially one helper extension
-  in the family enables you to be much more creative with your templates - the extension called VHS (extension key `vhs`) which
-  contains hundreds of general purpose ViewHelpers.
-* We recommend using known Extbase conventions for placing configuration files, language files, private/public resources, class
-  files and in short, everything that you are building.
+* Рекомендуется использовать расширения для хранения всех файлов: шаблонов, значков, изображений, стилей, сценариев и так далее. Подобный подход дает несколько удобных соглашений для большинства ссылок на ресурсы. Например, файлы LLL могут располагаться в стандартных местах, а функции для вызова переводов сильно сокращаются. Почти во всех случаях можно ссылаться на файлы, используя при необходимости пути EXT:myext...
+* В шаблонах рекомендуется использовать проекторы (ViewHelpers) для формирования меню, вывода содержимого, включения стилей/сценариев и много другого - почти все, для чего использовался TypoScript, теперь можно использовать в шаблонах Fluid. Крайне рекомендуем к использованию в шаблонах одно полезное расширение под названием VHS (ключ `vhs`),
+оно содержит сотни проекторов (ViewHelpers) общего назначения.
+* Мы рекомендуем использовать известные из Extbase соглашения для размещения файлов настроек, языковых файлов, приватных (private)/общедоступных (public) ресурсов, таблиц стилей и всего того, что нужно для работы шаблона.
 
-The main difference lies in the recommended use of an extension to store your files. We call this particular type of extension
-a "Provider Extension" - it "provides templates and configuration for those templates". A Provider Extension may still contain
-the usual Extbase plugins, static TypoScript and such, but should prepare to respect a few reserved controller names and therefore
-also template locations:
+Основное отличие касается рекомендации использования расширения для хранения файлов. Мы называем такой тип расширений -
+"Расширение поставщик" ("Provider Extension"), так как они "поставляют шаблоны и настройки для этих шаблонов". В них по прежнему могут находиться обычные дополнения Extbase, статический TypoScript и другие подобные вещи, но при этом должны соблюдаться правила относительно использования зарезервированных названий контроллеров и, ввиду этого, местоположений шаблонов:
 
-* The `Page` Controller name and template path is reserved for page template files using EXT:fluidpages.
-* The `Content` Controller name and template path is reserved for content element template files using EXT:fluidcontent.
-* The `Backend` Controller name and template path is reserved for backend module template files using EXT:fluidbackend.
+* Название контроллера `Page` и путь к шаблону зарезервирован для файлов шаблонов страниц, использующих EXT:fluidpages.
+* Название контроллера `Content` и путь к шаблону зарезервирован для файлов шаблонов элементов содержимого,
+использующих EXT:fluidcontent.
+* Название контроллера `Backend` и путь к шаблону зарезервирован для файлов шаблонов модулей внутреннего интерфейса,
+использующих EXT:fluidbackend.
 
-This approach is much different from what you are used to from TemplaVoila but is easily understood (or learned by example; good
-places to learn this way are the generic provider extensions you get from Fluid Powered TYPO3). Once you get used to this other
-approach which focuses on files instead of database configurations you will find your work flow more consistent; editing in your
-editor instead of through the TYPO3 backend and of using version control software on your template files and assets (don't
-despair - you can always learn this last bit once you are comfortable with the new way of doing things).
+Такой подход сильно отличается от использующегося в TemplaVoila, но лёгок для понимания (либо прост для обучения на примере;
+для освоения этого подхода таким способом лучше всего на примере общедоступных расширений проводников TYPO3 на базе Fluid). Как
+ только вы привыкнете к такому отличному подходу, в фокусе которого находятся файлы, а не настройки через базу данных,
+ то обнаружите, что работа проходит более последовательно; редактируйте все в своем любимом редакторе,
+ вместо внутреннего интерфейса TYPO3 и пользуйтесь программами контроля версий для файлов шаблонов и ресурсов (не унывайте,
+ последнему всегда можно научиться, как только почувствуете уверенность в использовании нового подхода).
 
-It is quite a change if you are used to editing files through TYPO3's backend. But it's also a jump that's very much worth making.
+Это сильно отличатся от редактирования файлов через внутренний интерфейс TYPO3. Но в то же время,
+это большой и значимый скачок в развитии.
 
-### Why is this way better?
+### Почему этот способ лучше?
 
-There are quite a few ways why we thing this new way is a lot better than the old way. Among our favorite reasons are:
+Есть множество причин, по которым мы считаем такой новый подход лучшим, чем старый. Помимо прочего это:
 
-* It's better to use Fluid to define additional, flexible fields for a record than to use a traditional FlexForm. Not only does
-  it become dynamic (conditions, loops etc. become possible) - it is also around 10x more compact than FlexForm XML and the
-  difference just increases as complexity rises: your Flux field is still one ViewHelper tag but the XML could be 30+ nodes.
-* It's better to use files than database storage for a site's design. It's less error prone (remember those UTF8-upgrades that
-  broke your TemplaVoila template mappings...?) and allows for much better version control and conflict resolution when multiple
-  authors work on the same template file.
-* It's better to use an extension to store your files. This makes it far more portable and version control becomes a breeze. Just
-  to name one benefit of this: you can download the extension from your site, make any changes you need and re-upload it with
-  overwriting enabled - which is a far more efficient way to deploy a new design than having to merge database differences between
-  a development and production site.
-* It's better to use a Fluid ViewHelper to render a menu object. Not only does this make it much easier to render different menus
-  in different templates (including templates provided by other extensions!) without the need for a massive TypoScript object to
-  be included with the template.
-* It's better to use ViewHelpers rather than TypoScript objects to render dynamic or otherwise complex content and page template
-  parts. This makes it much more transparent - you don't have to investigate the TypoScript to find out for example if a condition
-  there has replaced some content in your template. Debugging is also easier: you simply use `<f:debug>` in your template and it
-  becomes immediately visible which variables are available and how they would affect rendering.
+* Для определения дополнительных полей в формах настроек проще использовать Fluid, чем традиционные FlexForm. Причина здесь не
+только в том, что они стали действительно динамическими (стали возможными условия, рекурсии и т. п.),
+но и более чем в 10 раз компактная форма записи, чем FlexForm XML, при этом разница становится более ощутимой с ростом
+сложности формы: поля Flux - это лишь один тег проектора (ViewHelper), а XML может состоят из более чем 30 узлов.
+* Для дизайна сайта лучше подходят файлы, а не поля базы данных. Уменьшение числа ошибок (вспомните обновление кодировки до
+UTF8, ломающее разметку шаблона в TemplaVoila...) и возможность контроля версий,
+разрешение конфликтов при многопользовательской работе над одним и тем же файлом шаблона.
+* Для хранения файлов лучше использовать расширение. Это улучшает переносимость, а контроль версий происходит попутно. Укажем
+лишь одно преимущество такого подхода: расширение можно загрузить со своего сайта, внести необходимые изменения,
+заново закачать с указанием перезаписи. Так значительно проще изменить дизайн, чем объединять базы данных с рабочего и
+тестового сайтов.
+* Для формирования объекта меню лучше использовать проектор (ViewHelper) Fluid. Это не только упрощает создание различного рода
+ меню в разных шаблонах (включая шаблоны из сторонних расширений!) без нужды включения массивного объекта TypoScript в шаблон.
+* Для формирования динамического или сложного содержимого страницы или частей шаблона лучше использовать проекторы
+(ViewHelpers), а не объекты TypoScript. Это делает шаблоны более прозрачными для понимания - не нужно постигать сложности
+TypoScript для поиска условия и замены некоего содержимого в шаблоне. Отладка также упрощена: просто воспользуйтесь проектором
+`<f:debug>` в шаблоне, и сразу же будут видны все доступные переменные, и их влияние на формирование содержимого.
 
-But really, what we consider the main benefit is that we get to use Fluid for every single design and layout aspect of our sites.
-And that we don't have to spend a lot of time worrying about integration - now, much more than before, we can focus on the core
-task of creating excellent designs, useful and flexible content elements and much more.
+Но самое большое преимущество, как нам кажется, кроется в том, что возможно использовать Fluid для отдельного дизайна и любой
+части макета сайтов. И то, что не нужно задумываться над интеграцией - теперь все гораздо проще, чем в прошлом,
+можно сконцентрироваться над решением самой задачи создания превосходного дизайна, полезных и гибких элементах содержимого и
+других подобных вещах.
 
-It also doesn't hurt that there are many helper extensions which make it easier to work with Fluid. There are ViewHelper
-collections as well as special feature extensions such as EXT:view which allows you to use overlay template paths (instead of
-replacing an entire set of templates in a path, just the files which exist in the overlay are overridden - the rest are simply
-taken from the original location).
+Помимо прочего, имеется множество полезных расширений, упрощающих работу с Fluid. Имеется коллекция проекторов (ViewHelper)
+наряду с функциональными расширениями, вроде EXT:view, позволяющих использовать переназначение путей к шаблону (вместо замены
+всего набора шаблона по указанному пути, переназначаются лишь файлы, существующие по переназначаемому пути,
+все остальное берется из оригинального местоположения).
 
-We can't wait to tell you about all the improvements you can make to your templating workflow but would much rather show you
-instead. So to get started quickly or just take a little peek at what Fluid Powered TYPO3 can do for you, check out the
-[Live Bootstrap-based Introduction Package Demo](http://bootstrap.typo3cms.demo.typo3.org/) - follow the links to download the
-package yourself, prepare a virtual host in your favorite web server software and unwrap. It is extremely easy to dive right into
-the really interesting part: the templates. And your changes have immediate results.
+Мы не можем рассказать обо всех улучшениях и удобствах в процессе создания шаблонов, лучше показать все это. Так что лучше
+самостоятельно попробовать или взглянуть, что такое TYPO3 на базе Fluid, перейдя на
+[Live Bootstrap-based Introduction Package Demo](http://bootstrap.typo3cms.demo.typo3.org/) - можно загрузить самостоятельно
+весь пакет, подготовить для него виртуальный хост на веб сервере и развернуть его там. Очень просто окунуться прямо в самую
+интересную часть - шаблоны. Все внесенные изменения сразу будут видны.
 
-Hope you enjoy!
+Надеюсь, Вам понравиться!

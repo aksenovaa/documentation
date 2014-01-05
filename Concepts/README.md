@@ -1,12 +1,12 @@
-Fluid Powered TYPO3: Concepts
+TYPO3 на базе Fluid: Concepts
 =============================
 
 ## Introduction
 
-This section of the documentation explains all concepts used in the extensions provided by the Fluid Powered TYPO3 team.
+This section of the documentation explains all concepts used in the extensions provided by the TYPO3 на базе Fluid team.
 
 You will find details about the following concepts - the further down the list you go, the more advanced the concepts get. When
-you start off using Fluid Powered TYPO3, you will likely only need to know a few of these concepts. But the more you use the
+you start off using TYPO3 на базе Fluid, you will likely only need to know a few of these concepts. But the more you use the
 extensions, the more likely it is you will at some point want/need to use other concepts.
 
 The information is in-depth; if you are just now starting, then you should start with the [Beginner's Guide](../BeginnersGuide.md)
@@ -18,7 +18,7 @@ and come back to this section if and when you need more detailed information abo
   Is where you will find information about the preferred, always-recommended template storage: TYPO3 extensions which contain the
   templates your site should use.
 * [Templates](Templates.md)
-  Is where you find the low-down on how Fluid templates are used by Fluid Powered TYPO3.
+  Is where you find the low-down on how Fluid templates are used by TYPO3 на базе Fluid.
 * [Flux Forms](FluxForms.md)
   Is all about the forms you can make with Flux - different ways to create them, how they work together with TYPO3, understanding
   the structure of forms and how the different components fit together.
@@ -47,7 +47,7 @@ levels mean:
 2. The inner layer, **layer 2**: Classes, Controllers, Services - "internals". Medium complexity.
    The more advanced ways you can integrate with Flux are opened up in PHP - they are (generally speaking) not available to be
    used through TypoScript or in Fluid templates. Since this layer uses PHP only, it requires a fair bit of knowledge about making
-   Extbase classes (or a brain tuned perfectly to learning by example, because there are plenty examples in Fluid Powered TYPO3's
+   Extbase classes (or a brain tuned perfectly to learning by example, because there are plenty examples in TYPO3 на базе Fluid's
    extensions in the form of features like `fluidpages`).
 3. The core layer, **bottom layer**: For experienced developers. High to very high complexity.
    This layer is normally one you never have to touch. There are almost no features as such at this layer, but there are ways to

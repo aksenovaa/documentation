@@ -1,7 +1,7 @@
-Welcome, Contributor!
-=====================
+Добро пожаловать, автор!
+========================
 
-On behalf of the entire Fluid Powered TYPO3 team, thank you for wanting to contribute to our
+On behalf of the entire TYPO3 на базе Fluid team, thank you for wanting to contribute to our
 projects - by creating issues, pull requests or just asking great support questions which
 can help other users in the future.
 

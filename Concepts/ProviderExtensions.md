@@ -1,4 +1,4 @@
-Fluid Powered TYPO3: Concepts - Provider Extensions
+TYPO3 на базе Fluid: Concepts - Provider Extensions
 ===================================================
 
 ## Foreword
@@ -45,7 +45,7 @@ Although there are of course many more points (version control efficiency, TS co
 these three should be enough to convince you that starting to use extensions instead of files in `fileadmin` will, very quickly
 even, save you a lot of time especially when using resources (including LLL).
 
-But if that's not enough: other features Fluid Powered TYPO3 provides assume you already use an extension - and we have designed
+But if that's not enough: other features TYPO3 на базе Fluid provides assume you already use an extension - and we have designed
 it all to fit together so that your Provider Extension may contain content and page templates, custom plugins, backend modules
 etc. as one combined package - obviously ideal as a way to ship entire site designs along with all configuration and with all
 dependencies set as extension dependencies that the TYPO3 extension manager will install.
@@ -121,7 +121,7 @@ feature documents how exactly they will use the templates from your Provider Ext
 
 ## Custom controllers in Provider Extensions
 
-Some features of Fluid Powered TYPO3 - such as `fluidcontent` and `fluidpages` - support custom controller classes which Flux will
+Some features of TYPO3 на базе Fluid - such as `fluidcontent` and `fluidpages` - support custom controller classes which Flux will
 use instead of the controllers that ship with each of those features. Naturally this allows much more flexibility (as an example,
 a custom `PageController` can accept custom arguments in the action that corresponds to the template that gets rendered). If and
 when you add custom controller classes the location and naming of these also must follow Extbase conventions:
@@ -148,5 +148,5 @@ they share the same extension scope, as already explained.
 The only thing you must be careful of, is not to use the reserved `Content`, `Page`, `CoreContent` or `Backend` controller names
 if (and only if) you intend to use either of those features - from `fluidcontent`, `fluidpages`, `fluidcontent_core`, and
 `fluidbackend` respectively. If you don't use a particular feature you can of course grab the reserved controller name for your
-controller - but it is recommended to avoid these names if you are not sure if you may be using other Fluid Powered TYPO3 features
+controller - but it is recommended to avoid these names if you are not sure if you may be using other TYPO3 на базе Fluid features
 later on in your Provider Extension.

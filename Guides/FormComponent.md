@@ -1,4 +1,4 @@
-## Fluid Powered TYPO3: Form Component Guide
+## TYPO3 на базе Fluid: Form Component Guide
 
 ### Foreword
 

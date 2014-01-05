@@ -1,4 +1,4 @@
-Fluid Powered TYPO3: Concepts - Providers
+TYPO3 на базе Fluid: Concepts - Providers
 =========================================
 
 ## Foreword

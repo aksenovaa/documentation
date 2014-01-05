@@ -1,6 +1,6 @@
-## Fluid Powered TYPO3: Best Practice for Code Building
+## TYPO3 на базе Fluid: Best Practice for Code Building
 
-This section of the documentation describes how to build code automatically. There are a few features in the Fluid Powered TYPO3
+This section of the documentation describes how to build code automatically. There are a few features in the TYPO3 на базе Fluid
 family which enable automatic code generation based on conventions. The first and most important such feature is the code
 generation features of EXT:builder which can be found on Github: [https://github.com/FluidTYPO3/builder](https://github.com/FluidTYPO3/builder).
 
@@ -53,7 +53,7 @@ OPTIONAL ARGUMENTS:
                        can then "git add remote origin <URL>" and "git push
                        origin master -u" to push the initial state
   --travis             If TRUE, generates a Travis-CI build script which uses
-                       Fluid Powered TYPO3 coding standards analysis and code
+                       TYPO3 на базе Fluid coding standards analysis and code
                        inspections to automate testing on Travis-CI
 ```
 
@@ -99,7 +99,7 @@ problems in annotations used for example in Controllers, validating them to ensu
 
 [Travis CI](https://travis-ci.org/) is a service that is free to use for OpenSource projects - what it provides is a way to run
 automated "builds" of your code, using scripts you can configure. EXT:builder can create a Travis build configuration which uses
-Fluid Powered TYPO3 standards and code inspections to check your code. When built (and activated in Travis-CI by signing up and
+TYPO3 на базе Fluid standards and code inspections to check your code. When built (and activated in Travis-CI by signing up and
 switching on your repository in the list of your repositories), the Travis-CI script will automatically install dependencies as
 required by your extension. EXT:builder is then used to perform a range of tests and finally, phpunit is called on to run any unit
 tests your extension may contain (which includes tests built by using EXT:builder itself).

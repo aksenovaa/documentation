@@ -1,4 +1,4 @@
-## Fluid Powered TYPO3: Best Practice
+## TYPO3 на базе Fluid: Best Practice
 =====================================
 
 Plugins

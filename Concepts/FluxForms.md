@@ -1,4 +1,4 @@
-Fluid Powered TYPO3: Concepts - Flux Forms
+TYPO3 на базе Fluid: Concepts - Flux Forms
 ==========================================
 
 ## Foreword
@@ -40,7 +40,7 @@ that once you learn the basic idea of Flux Forms using the Form Component you ca
 What you gain from using the Flux Form Component API instead of pure PHP arrays is first and foremost a more IDE-friendly way of
 creating forms: when you use the PHP API of Flux you have auto-completion of code and when you use the Fluid ViewHelper API you
 have auto-completion as an optional feature, by using XSD schemas. There's a [great guide for using XSD schemas in PHPStorm](http://buzz.typo3.org/teams/extbase/article/howto-autocompletion-for-fluid-in-phpstorm/)
-over at buzz.typo3.org - it uses Fluid Powered TYPO3's `schemaker` extension. The only API Flux provides which does not enable
+over at buzz.typo3.org - it uses TYPO3 на базе Fluid's `schemaker` extension. The only API Flux provides which does not enable
 any immediate auto-completion is the TypoScript API.
 
 The Flux Form Component can be used to define Form structures for entire tables (effectively removing the need for TCA files) but
@@ -188,7 +188,7 @@ values from the class and property doc comments, then build a Form instance from
 
 You will still (at the time of writing this) be required to create the `ext_tables.sql` file with SQL schema definitions for your
 Model's tables - however, efforts are being made to automate this process through the [builder](https://github.com/FluidTYPO3/builder)
-extension also provided by the Fluid Powered TYPO3 team.
+extension also provided by the TYPO3 на базе Fluid team.
 
 **TODO: ADD API REFERENCE LINK**
 **TODO: ADD COOKBOOK RECIPES LINK**

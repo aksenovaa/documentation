@@ -1,119 +1,126 @@
-## Fluid Powered TYPO3: Beginner's Guide
+## TYPO3 на базе Fluid: руководство для начинающих
 
-> This document describes the concepts and features found in the Fluid Powered TYPO3 extension family. You can read this guide
-> as if it were a book about the thinking behind the features.
+> Этот документ описывает идеи и возможности расширений TYPO3 на базе Fluid. Можно знакомиться с этим руководством,
+> как с обычной книгой с размышлениями о возможностях.
 
-### A foreword about the Bootstrap Package
+### Предисловие о пакете Bootstrap
 
-A special introduction package has been created by Fabien Udriot of [Ecodev](http://ecodev.ch) - this package showcases almost all
-of the possibilities and many of the best practices for creating fluid pages and content elements.
+Fabien Udriot из [Ecodev](http://ecodev.ch) создал специальный пакет introduction, который демострирует почти все возможности и
+ лучший опыт по созданию страниц и содержимого на fluid.
 
-Download the [Bootstrap Introduction Package](http://get.typo3.org/bootstrap) and unpack it, create an Apache virtual host for
-the new site and point your web browser to the new site. Follow the install wizard and when you're done, come back to
-this document. You can read the rest of this document while checking out the relevant parts of the newly installed site - doing it
-this way makes a lot of sense since all the special settings, integrations and files which are mentioned in this guide are also
-used in that package.
+Загрузите [Bootstrap Introduction Package](http://get.typo3.org/bootstrap) и разархивируйте его,
+создайте виртуальный хост Apache для нового сайта. Следуйте указаниям мастера установки, как только все будет готово,
+вернитесь к этому документу. Можно совмещать чтение этой документации с просмотром соответствующих частей только что
+установленного сайта - это очень важно, так как все специфические настройки, ресурсы и файлы, упоминающиеся в руководстве,
+также используются и в пакете.
 
-Besides this, the introduction package is a great teaching and study tool if you wish to study a current, best-practice setup.
+Помимо прочего, introduction package - отличный инструмент для обучения передовой техники настроек и создания сайтов.
 
-# The Beginner's Guide
+# Руководство для начинающих
 
-At first glance the Fluid integration features provided by the extensions in this family can seem overwhelming. But don't worry -
-due to focus on separation of concerns it is easy to quickly understand the purpose of each extension.
+На первый взгляд связь расширений Fluid может показаться тесной и не вполне ясной. Но не волнуйтесь,
+предназначение каждого расширения легко понять по решаемым ими проблемам.
 
-The first three extensions you need to know are *Flux*, *Fluid Pages* and *Fluid Content*. Their extension keys are *flux*,
-*fluidpages* and *fluidcontent*. You can read a little bit about each extension on this page - and there is much more
-documentation about each, in other sections of this documentation repository.
+Сначала нужно познакомиться с первыми тремя расширениями: *Flux*, *Fluid Pages* и *Fluid Content*. Ключи этих расширений,
+соответственно, *flux*, *fluidpages* и *fluidcontent*. О каждом из этих расширений вкратце рассказывается на этой странице,
+а детально - в других разделах этой же документации.
 
-In this document, all the concepts used in Fluid Powered TYPO3 extensions are explained one by one. Each concept is covered in a
-section by itself, starting from the core concept and building outwards to each individual feature.
+В текущем документе последовательно расказывается о всех концепциях расширений TYPO3 на базе Fluid. Каждая концепция
+рассматривается в отдельном разделе, начиная с корневой концепции и далее раскрывается каждая отдельная идея.
 
 ## Flux: Fluid FlexForms
 
-> Fluid template based FlexForms using ViewHelpers for compact and dynamic configurations.
+> Шаблон Fluid на основе FlexForm, использующих проекторы (ViewHelpers) для компактных и динамичных настроек.
 
-Flux lies at the core of every feature in the Fluid Powered TYPO3 family of extensions. Flux has a single purpose in life: to
-allow a new type of very compact, very dynamic Flex Form to be integrated in a Fluid template. The result? You can add advanced
-form sections with configuration options which content editors can fill out. By using Flux both Fluid Pages and Fluid Content
-allow pages and content elements to be configured individually - while at the same time allowing the form fields to be defined
-directly in the Fluid template for pages and content elements respectively.
+В основе всех особенностей расширений TYPO3 на базе Fluid лежит Flux. И у него лишь одна цель: интеграция в шаблон Fluid нового
+ типа сверхкомпактрых, супердинамичных форм настроек (Flex Form). Результат? Возможность добавления сложных разделов форм с
+ параметрами настроек, заполняемых редакторами. При помощи Flux возможна тонкая настройка как страниц,
+ так и содержимого на базе Fluid (Fluid Pages и Fluid Content), в то же время возможно индивидуальное определение полей форм
+ непосредственно в шаблоне Fluid для страниц и элементов содержимого, соответственно.
 
-If this sounds a bit abstract to you, imagine that you have a content element which requires a toggle - for example to turn on
-and off a special output section in the content element's template. With traditional plugins you would either have to extend the
-`tt_content` table or use a FlexForm (with a huge XML data structure just to add this one field, and registration of the
-`pi_flexform` field). With Flux you can simply add a ViewHelper tag in your template's configuration and the resulting field is
-displayed when a content element of that type is edited or created. This is very much like the way a traditional FlexForm works,
-with the major difference being that you don't need to enable the field or create a special XML file for your FlexForm's data
-structure - which is not only much more compact but also becomes dynamic since you are able to use Fluid's conditions, loops and
-much more to affect your form's fields and structure.
+Если это звучит слишком абстрактно, представьте, что имеется элемент содержимого, которому необходим переключатель,
+например для включения/отключения вывода специального раздела в шаблоне элемента. В традиционных дополнениях необходимо либо
+дополнить таблицу `tt_content`, либо воспользоваться формой настроек - FlexForm (с огромной структурой XML данных,
+просто для добавления этого одного поля, и регистрацией поля `pi_flexform`). При помощи Flux можно просто добавить тег
+проектора (ViewHelper) в настройке шаблона, а поле будет выведено при редактировании или добавлении этого типа элемента. Это
+очень похоже на работу обычных структур данных форм настроек (FlexForm), с одной лишь огромной разницей - для вывода поля нет
+необходимости создавать специфичного файла XML для данных FlexForm, что не только значительно компактнее,
+но и придает формам динамику, ввиду возможности использования условий, циклов и много другого из Fluid,
+что может влиять на структуру полей формы.
 
-Flux FlexForms are by design capable of containing a special Preview section (using f:section). This special section can contain
-an HTML or plaintext representation of the content element, plugin settings, typoscript settings preview - or anything you desire.
+Flux FlexForm разработаны так, что могут содержать специальный раздел Preview - предпросмотр (при помощи f:section). Этот
+специальный раздел может содержать HTML или текстовое представление элемента содержимого, настроек дополнения,
+настроек typoscript - и всего, что пожелаете.
 
-Flux can also be used by any type of plugin (also pibase) to not only use these dynamic Fluid FlexForms - but also contain child
-content elements (just like Fluid Content elements can). This child content feature is a sub function of Flux, one that consists
-of a simple parent-child relationship column and a special Fluid Widget which allows the Preview section to contain a special
-content grid into which content elements can be inserted.
+Flux возможно использовать во всех типах дополнения (в том числе и в pibase) и не только для динамичных Fluid FlexForms,
+но и для включения дочерних элементов содержимого (как это сделано в самих элементах Fluid Content). Возможность подключать
+дочерние элементы является функцией Flux, возможной благодаря столбцу со связью родитель-потомок и специальному виджету Fluid,
+допускающему включать специальную сетку (grid) с элементами содержимого в разделе Preview (предпросмотр).
 
-### The juicy tech details about Flux
+### Пикантные технические детали Flux
 
-In order to understand how Flux forms work you must first understand the concept of FlexForms. These special "forms" are in fact
-special field types supported natively by the TYPO3 core. The field uses a special XML structure file containing a list of fields
-(and more special configuration such as sheets or sections with reusable objects - there's more on this later). What Flux does is
-remove the need for an XML file - instead, Flux makes it possible to define the same structure as a special chunk of template
-code exclusively using Fluid ViewHelpers. When used, the special ViewHelper types in Flux store the configuration (array form)
-needed for TYPO3 to render a special "inline form" - a "FlexForm field".
+Для четкого понимания работы форм Flux, сначала нужно уяснить концепцию FlexForm. Эти специфичные "формы" фактически -
+специальный тип поля, изначально поддерживаемый ядром TYPO3. В самом поле находится файл определенной XML структуры,
+содержащей список полей (и более сложные настойки, вроде вкладок - sheets, или разделов с многократно используемыми объектами -
+ но о них позже). Все, что делает Flux - удаляет зависимость от этого самого сложного XML файла,
+ а вместо этого ту же структуру становиться возможным определить в виде специальной последовательности кода в шаблоне,
+ используя лишь проекторы (ViewHelpers) Fluid. В процессе работы, специальные типы проекторов (ViewHelper) Flux хранят
+ настройки (массив форм), необходимый TYPO3 для формирования специфичных "встроенных (inline) форм" - "полей FlexForm".
 
-Flux hooks into TYPO3 and is triggered whenever a field of the type "flex" (for example: `tt_content.pi_flexform` is such a field)
-and instead of processing an XML file, Flux processes a Fluid template file and turns it into a data structure.
+Flux внедряется (hooks) в TYPO3 и срабатывает каждый раз при появлении поля типа "flex" (пример: `tt_content.pi_flexform` -
+такое поле), при этом, вместо анализа файла XML, Flux анализирует файл шаблона Fluid, превращая его в структуру данных.
 
-The integration with content and pages builds on *parsing the record from `tt_content` or `pages` and analysing the values of the
-special selector fields* which are added to the tables' TCA configuration by fluidcontent and fluidpages respectively. This value
-(in the context of pages, it can be inherited from parent pages) determines which template file contains the Flux form definition
-as well as the actual rendering of the content element, page template, plugin view etc.
+Интеграция с содержимым и страницами производится за счет *разбора записей из таблиц `tt_content` или `pages` и анализа
+значений специального указателя*, добавляемого к настройке таблиц TCA расширениями fluidcontent и fluidpages,
+соответственно. Эти значениия (в контексте страниц, они могут наследоваться от родительских страниц) указывают,
+в каких файлах находятся определения для форм Flux наряду с фактическим указанием для формирования элементов содержимого,
+шаблонов страниц, режимов вывода дополнений и т. д.
 
-In order to do this (and a few other operations) Flux uses a special concept: the ConfigurationProvider pattern.
+Для того, чтобы это все было возможно (и некоторые другие операции), Flux использует специальную концепцию: шаблон поставщика
+настроек -  ConfigurationProvider.
 
-## What is a ConfigurationProvider?
+## Что такое Поставщик настроек - ConfigurationProvider?
 
-A ConfigurationProvider is a special type of class which serves a specific purpose - much like an Extbase Controller class which
-renders Reponses to Requests, a ConfigurationProvider returns values needed to identify a template file and configure the
-rendering process. A ConfigurationProvider serves as the link between a record of a particular type and a Fluid template. Which
-simply means that in order for Flux to know which template file it should render, it asks for a ConfigurationProvider to return
-the template path and filename, variables which must be assigned to the template when rendering, paths to Layouts and Partials
-the template should use and much more.
+ConfigurationProvider - это специальный тип класса для определенных целей, больше всего схожий с классом Extbase Controller,
+формирующий ответы (Reponses) на запросы (Requests), ConfigurationProvider возвращает значения,
+необходимые для идентификации файлов шаблона и настраивающие процесс вывода. ConfigurationProvider служит связующим звеном между
+записью определенного типа и шаблоном Fluid. Это все прото означает, что для того, чтобы Flux знал,
+какой файл шаблона нужно выводить, он запрашивает ConfigurationProvider о нужном пути к шаблону и названии файла, переменных,
+которые должны быть переданы в шаблон при его выводе, путях к макетам (Layouts) и шаблонным частям (Partials),
+используемых в шаблоне и многое другое.
 
-The ConfigurationProvider also serves as a *record processor* which means it is capable of manipulating records before they are
-saved, whenever TYPO3 performs operations on these records. This includes when a record's values are updated, when a record is
-deleted, moved, hidden and so forth.
+ConfigurationProvider также выступает как *обработчик записи*, то есть он может манипулировать записью, перед тем,
+как она будет сохранена после каждой операции с ней в TYPO3. Это происходит при обновлении, удалении, перемещении,
+скрытии записи и подобных с ней процессах.
 
-In other - and much shorter words - the ConfigurationProvider has two purposes: one is to return a proper template and template
-related configuration for Flux to use; the other is to configure records (if this is necessary). And every method which reads
-these variables and processes records accepts the current record (as array) which allows the ConfigurationProvider to, just for
-example, return a dynamic value for $templatePathAndFilename based on the current record being edited/rendered - which is exactly
-how fluidcontent and fluidpages both work: by using a special field in the record, in which a value is stored that can be used
-to resolve a template filename, a set of template paths and more.
+Другими, гораздо более краткими, словами, у ConfigurationProvider две цели: одна - указание соответствующего шаблона и
+связанных с ним настроек для Flux, другая - настройка записей (при необходимости). Каждый метод,
+читающий эти переменные и обрабатывающий записи, принимает текущую запись (в виде массива),
+что позволяет ConfigurationProvider, например, вернуть динамическое значение для $templatePathAndFilename полагаясь на
+редактируемую/выводимую в данный момент запись, также, как работают fluidcontent и fluidpages: используя значение из
+специального поля в записи, а в него уже может быть занесено название файла шаблона, набор путей к шаблону и многое другое.
 
-### The practical example: Flux's standard ConfigurationProvider
+### Практический пример: стандартный ConfigurationProvider из Flux
 
-The most basic ConfigurationProvider in Flux is attached to the `tt_content` table and triggers whenever content records are saved,
-moved etc. The purpose of this ConfigurationProvider is to *adjust the position of content elements when they are saved in nested
-content element containers also enabled by Flux* - it reacts to new records being created or records being drag-n-dropped into
-content areas, then adjusts values in the record which define where the content element is located relative to the parent and area
-name of that parent.
+Основной ConfigurationProvider во Flux закреплен за таблицей `tt_content` и срабатывет при всяком сохранении,
+перемещении и т. п. записей содержимого. Предназначение этого ConfigurationProvider - *регулировка позиции элементов
+содержимого при их сохранении в родительском элементе контейнере, также обрабатываемого во Flux*,
+срабатывает это при всяком создании записей, либо их перемещении мышкой в элемент-контейнер, путём занесения значений,
+определяющих местоположение элемента содежимого в области родительского и название этой области,
+в запись.
 
-Then, added on top of this ConfigurationProvider, is fluidcontent's ConfigurationProvider which also triggers on the `tt_content`
-table's records being manipulated but instead of "just" handling relations to other content elements, this ConfigurationProvider
-also is capable of returning different template paths and template filenames based on the `tx_fed_fcefile` field of `tt_content`
-(this field is named so for legacy reasons; it contains a specially formatted reference to the selected Fluid content type and the
-collection to which it belongs).
+Далее добавляется ConfigurationProvider для fluidcontent, который срабатывает также при манипуляции записями из таблицы
+`tt_content`, но вместо "простой" обработки связей с другими элементами содержимого, этот ConfigurationProvider также способен
+указывать различные пути к шаблонам и файлам на основе содержимого поля `tx_fed_fcefile` таблицы `tt_content` (название этого
+поля сложилось по традиции, а содержит оно ссылку на выбираемый Fluid тип содержимого и коллекцию, к которой оно принадлежит,
+специальным образом отформатированную).
 
-These are just examples of how a ConfigurationProvider can be used in practice to control every little detail about how each Flux
-template should be handled - and even which template should be used - based on the current record being rendered or manipulated.
+Это лишь примеры того, как можно на практике использовать ConfigurationProvider для контроля каждой мелочи при обработке
+шаблона во Flux - какой шаблон нужно использовать, полагаясь на данные формируемуемой или обрабатываемой в данный момент записи.
 
-The concept is also used in fluidpages where, instead of triggering on `tt_content` records, it triggers on `pages` records and
-returns a template file, paths, variables etc. based on which page template is selected in the page properties (with inheritance
-from parent pages supported as a native feature of fluidpages' ConfigurationProvider).
+Та же концепция применима и для fluidpages, где переключатель срабатывает не на записях `tt_content`, а на записях `pages`,
+а указываются уже файлы, пути, переменные и тому подобное для шаблонов на основе свойств страницы (с наследованием из
+родительских страниц, что является отличительной чертой ConfigurationProvider fluidpages).
 
-You can construct your own ConfigurationProvider classes for those cases when you need a greater degree of control over the Flux
-form associated with, for example, your custom Extbase plugin.
+Возможно построить свой класс ConfigurationProvider, если нужен другой уровень контроля над формами Flux, связанными, например,
+ с пользовательским дополнением Extbase.

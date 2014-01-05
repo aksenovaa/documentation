@@ -1,49 +1,50 @@
-Fluid Powered TYPO3: Online Services
-====================================
+TYPO3 на базе Fluid: сетевые службы
+===================================
 
-A compiled list of services which you can use - resources for documentation, download locations, code generation services and such.
+Подборка полезных служб - ресурсы с документацией, загрузки, службы для формирования кода и тому подобное.
 
-### Resources
+### Ресурсы
 
-1. [This documentation's repository on Github](https://github.com/FluidTYPO3/documentation). You can submit issues or request for
-   changes to this documentation through the official repository.
-2. [Official web site](https://fedext.net) contains blog/news, references and information about the project and team behind it.
-3. [Support chat](https://fedext.net/support-chat.html) is an IRC plugin which lets you speak to us - when we are around.
-4. [IRC channel #fedext](http://freenode.net/irc_servers.shtml) which you can access with any IRC client. It's the same channel
-   you enter when you use the Support Chat.
-5. [Continuous integration using Travis](https://travis-ci.org/FluidTYPO3/flux) displays the current build status for all of our
-   extensions. Here, you can investigate the logs in all glorious detail. Simply replace the last url segment with the extension
-   key you wish to inspect.
-6. [ViewHelper Schema XSD files](https://fedext.net/viewhelpers.html) can be downloaded and used in your editor, for example
-   [as explained for PHPstorm on buzz.typo3.org](http://buzz.typo3.org/teams/extbase/article/howto-autocompletion-for-fluid-in-phpstorm/),
-   to get autocompletion for all ViewHelpers in Fluid itself, and all Fluid Powered TYPO3 extensions.
+1. [Репозиторий текщего документа на Github](https://github.com/FluidTYPO3/documentation). Можно сообщить о проблемах или
+запросить изменения в этой документации на английском языке в официальном репозитории.
+2. [Официальный сайт](https://fedext.net) имеется журнал/новости, ссылки и информация о проекте и команде, стоящей за ним.
+3. [Чат поддержки](https://fedext.net/support-chat.html) IRC дополнение, позволяющее пообщаться с нами, когда мы доступны.
+4. [IRC канал #fedext](http://freenode.net/irc_servers.shtml) имеется доступ с любого IRC клиента. Тот же канал,
+что и для чата поддержки.
+5. [Непрерывная интеграция при помощи Travis](https://travis-ci.org/FluidTYPO3/flux) выводится информация о статусе всех наших
+расширений. Здесь можно рассмотреть все журналы во всей красе. Просто замените последнюю часть в url ключом расширения,
+о котором нужна информация.
+6. [Файлы схемы XSD схем проекторов - ViewHelper](https://fedext.net/viewhelpers.html) могут быть загружены и использованы,
+например, в используемых редакторах кода, [как описано для PHPstorm на buzz.typo3.org](http://buzz.typo3.org/teams/extbase/article/howto-autocompletion-for-fluid-in-phpstorm/) для работы автозавершения для всех проекторов
+(ViewHelpers) во Fluid и всех расширениях TYPO3 на базе Fluid.
 
-### Services
+### Службы
 
-There are a few services that you can use to get automatically generated packages for Fluid Powered TYPO3:
+Есть несколько служб, которые можно использовать для автоматического формирования пакетов для TYPO3 на базе Fluid:
 
-#### Provider Extension Generator
+#### Генератор расширений проводников
 
-You can get a skeleton Provider Extension which uses the most current build function from [EXT:builder](https://github.com/FluidTYPO3/builder)
-to generate on-the-fly a Provider Extension with your desired extension key.
+Получить каркас расширения проводника с большинством последних функций возможно в [EXT:builder](https://github.com/FluidTYPO3/builder)
+с любым желаемым ключом.
 
-To generate a Provider Extension, use this link - but replace `myextension` with the extension key you desire:
+Для формирования расширения проводника используйте следующую ссылку, только замените `myextension` на желаемый ключ:
 
 ```
 https://fedext.net/download/providerextension/myextension
 ```
 
-A skeleton Provider Extension takes about a second to generate and is about 7KB in size. It will always be in `.zip` format which
-you can either extract or upload to TYPO3 and install as extension.
+Формирование каркаса расширения проводника займет около секунды, и будет иметь размер около 7 КБ. Оно всегда создается в
+формате `.zip`, чтобы можно было распаковать и загрузить в TYPO3, а затем установить.
 
-#### Bootstrap Package
+#### Пакет Bootstrap
 
-A complete TYPO3 site based on the "introduction" package from TYPO3 but using Twitter Bootstrap for page and content templates.
-This package is built once in a while to contain the latest features for demonstration purposes.
+Полный TYPO3 сайт на основе пакета "introduction" из TYPO3, но с использованием Twitter Bootstrap для шаблонов страниц и
+содержимого.
+Этот пакет создан с целью демонстрации последних возможностей.
 
-You can download the most recent version at any time using these links:
+Последнюю версию всегда можно загрузить по следующим ссылкам:
 
 * http://get.typo3.org/bootstrap (tar.gz)
 * http://get.typo3.org/bootstrap/zip (zip)
 
-The package archive is around 55MB in size and contains instructions for its installation.
+Архив пакета занимает около 55 МБ и содержит инструкции по установке.

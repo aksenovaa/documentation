@@ -1,2 +1,2 @@
-## Fluid Powered TYPO3: Extensions
+## TYPO3 на базе Fluid: расширения
 ==================================

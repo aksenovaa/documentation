@@ -1,4 +1,4 @@
-## Fluid Powered TYPO3 Quickstart Guide
+## Краткое руководство по TYPO3 на базе Fluid
 
 Fed up with TemplaVoilà (which is end of life anyway)? Here's a squeezed guide to get you started with creating page
 templates and content elements using the [FluidTYPO3](http://github.com/FluidTYPO3) family of extensions.

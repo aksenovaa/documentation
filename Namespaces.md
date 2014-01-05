@@ -1,57 +1,56 @@
 ## GIT Master & 6.1 6.0
 
-Using 6.2-dev: You are fine, dont worry.
+Используете 6.2-dev: все отлично, не стоит беспокоиться.
 
 
-If you are upgrading flux to the current git master on typo3 6.0 or 6.1 you will currently break your installation. This is because of a bug in typo3:
+Если обновлять flux до текущего git master в typo3 6.0 или 6.1, работа TYPO3 будет сломана из-за ошибки в самом ядре typo3:
 
 http://forge.typo3.org/issues/54115
 
-##You have 2 ways to fix this:
-The preferred and recommended way to fix this problem is to replace code in your templatefiles. We provide a script for that. 
+## Для исправления этого имеется 2 способа:
+Лучший и рекомендуемый способ исправления - заменить код в файлах шаблонов. Для этого имеется специальный сценарий. 
 
-The second way to fix it, is a core hack in the source of TYPO3. We provide you a link at the 
-bottom of this page. (see headline Core Hack). 
+Второй способ исправления - уловка (hack) в ядре TYPO3. Внизу страницы указана ссылка на него (смотрите Исправление ядра). 
 
-### Change Templates (Preferred):
+### Изменение шаблонов (рекомендуется):
 
-Change every occurence of (see script - no need to do that by hand)
+Измените все вхождения следующих элементов (смотрите сценарий, нет необходимости проделывать это вручную)
 
-* ``{namespace flux=Tx_Flux_ViewHelpers}`` to ``{namespace flux=FluidTYPO3\Flux\ViewHelpers}``
-* ``flux:flexform`` to ``flux:form``
-* ``flux:flexform.grid`` to ``flux:grid``
-* ``flux:flexform.grid.column`` to ``flux:grid.column``
-* ``flux:flexform.grid.row`` to ``flux:grid.row``
-* ``flux:flexform.container`` to ``flux:form.container``
-* ``flux:flexform.data`` to ``flux:form.data``
-* ``flux:flexform.object`` to ``flux:form.object``
-* ``flux:flexform.section`` to ``flux:form.section``
-* ``flux:flexform.sheet`` to ``flux:form.sheet``
-* ``flux:flexform.field.wizard.add`` to ``flux:wizard.add``
-* ``flux:flexform.field.wizard.colorPicker`` to ``flux:wizard.colorPicker``
-* ``flux:flexform.field.wizard.edit`` to ``flux:wizard.edit``
-* ``flux:flexform.field.wizard.link`` to ``flux:wizard.link``
-* ``flux:flexform.field.wizard.list`` to ``flux:wizard.list``
-* ``flux:flexform.field.wizard.select`` to ``flux:wizard.select``
-* ``flux:flexform.field.wizard.slider`` to ``flux:wizard.slider``
-* ``flux:flexform.field.wizard.suggest`` to ``flux:wizard.suggest``
-* ``flux:flexform.field.checkbox`` to ``flux:field.checkbox``
-* ``flux:flexform.field.controllerActions`` to ``flux:field.controllerActions``
-* ``flux:flexform.field.custom`` to ``flux:field.custom``
-* ``flux:flexform.field.file`` to ``flux:field.file``
-* ``flux:flexform.field.inline`` to ``flux:field.inline``
-* ``flux:flexform.field.inline.fal`` to ``flux:field.inline.fal``
-* ``flux:flexform.field.input`` to ``flux:field.input``
-* ``flux:flexform.field.relation`` to ``flux:field.relation``
-* ``flux:flexform.field.select`` to ``flux:field.select``
-* ``flux:flexform.field.text`` to ``flux:field.text``
-* ``flux:flexform.field.tree`` to ``flux:field.tree``
-* ``flux:flexform.field.userFunc`` to ``flux:field.userFunc``
-* ``flux:flexform.content`` to ``flux:form.content``
+* ``{namespace flux=Tx_Flux_ViewHelpers}`` на ``{namespace flux=FluidTYPO3\Flux\ViewHelpers}``
+* ``flux:flexform`` на ``flux:form``
+* ``flux:flexform.grid`` на ``flux:grid``
+* ``flux:flexform.grid.column`` на ``flux:grid.column``
+* ``flux:flexform.grid.row`` на ``flux:grid.row``
+* ``flux:flexform.container`` на ``flux:form.container``
+* ``flux:flexform.data`` на ``flux:form.data``
+* ``flux:flexform.object`` на ``flux:form.object``
+* ``flux:flexform.section`` на ``flux:form.section``
+* ``flux:flexform.sheet`` на ``flux:form.sheet``
+* ``flux:flexform.field.wizard.add`` на ``flux:wizard.add``
+* ``flux:flexform.field.wizard.colorPicker`` на ``flux:wizard.colorPicker``
+* ``flux:flexform.field.wizard.edit`` на ``flux:wizard.edit``
+* ``flux:flexform.field.wizard.link`` на ``flux:wizard.link``
+* ``flux:flexform.field.wizard.list`` на ``flux:wizard.list``
+* ``flux:flexform.field.wizard.select`` на ``flux:wizard.select``
+* ``flux:flexform.field.wizard.slider`` на ``flux:wizard.slider``
+* ``flux:flexform.field.wizard.suggest`` на ``flux:wizard.suggest``
+* ``flux:flexform.field.checkbox`` на ``flux:field.checkbox``
+* ``flux:flexform.field.controllerActions`` на ``flux:field.controllerActions``
+* ``flux:flexform.field.custom`` на ``flux:field.custom``
+* ``flux:flexform.field.file`` на ``flux:field.file``
+* ``flux:flexform.field.inline`` на ``flux:field.inline``
+* ``flux:flexform.field.inline.fal`` на ``flux:field.inline.fal``
+* ``flux:flexform.field.input`` на ``flux:field.input``
+* ``flux:flexform.field.relation`` на ``flux:field.relation``
+* ``flux:flexform.field.select`` на ``flux:field.select``
+* ``flux:flexform.field.text`` на ``flux:field.text``
+* ``flux:flexform.field.tree`` на ``flux:field.tree``
+* ``flux:flexform.field.userFunc`` на ``flux:field.userFunc``
+* ``flux:flexform.content`` на ``flux:form.content``
 
-This can be done automatically using the following script:
+Все это автоматически выполняет следующий сценарий:
 
-**Use at your own risk, change $directory**
+**Используете на свой страх и риск, измените $directory**
 
 ```php
 <?php
@@ -134,10 +133,10 @@ foreach($ite as $file) {
 ```
 
 
-### Core Hack:
+### Исправление ядра:
 
-Change 1 line of code:
+Измените одну строку кода:
 
 https://review.typo3.org/#/c/25814/9/typo3/sysext/fluid/Classes/Core/Parser/TemplateParser.php
 
-You are pretty safe to do that, as the change will be backported to 6.0 and 6.1 on the next release.
+Можно спокойно сделать это, так как эти изменения уже будут внесены в следующие выпуски версий ядра 6.0 и 6.1.

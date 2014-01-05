@@ -1,34 +1,36 @@
-## Fluid Powered TYPO3: Best Practice for Configuration
+## TYPO3 на базе Fluid: лучшие решения по настройкам
 
-Before you read this chapter there are a few basic facts you must know. The extensions in this family (at least the feature
-providers: fluidcontent, fluidpages, fluidbackend) all use TypoScript Fluid view configurations to read a path to the templates
-which should be scanned.
+Перед прочтением этой главы, необходимо кое-что знать. Расширения этого семейства (по крайней мере, поставщики функционала:
+fluidcontent, fluidpages, fluidbackend), все используют настройки режимов Fluid через TypoScript для чтения путей к шаблонам,
+которые должны быть просканированы.
 
-Templates are then scanned on a file basis (by simply filtering through files of a certain format - html, xml etc) and parsed in
-order to read the actual per-template configuration options (such as the human readable label or icon for this template).
+Затем сканируются файлы шаблонов (путём простой фильтрации файлов определенных форматов - html,
+xml и т. д.) и анализируются на предмет параметров настроек пошаблонно (вроде человекочитаемых меток или значков для
+обозначения этого шаблона).
 
-There are multiple ways to set your template paths but only one preferred which builds solely on Extbase/Fluid conventions. All
-methods are described in this chapter, along with their implications so you can match them to your use case and use the right one.
+Существует несколько способов задания путей для шаблонов, но лишь один строго следует соглашениям относительно Extbase/Fluid.
+Все методы описаны в этой главе, наряду со следствиями из них вытекающими, так, чтобы легко можно было бы сопоставить с 
+реальной ситуацией и выбрать правильное решение.
 
-### TypoScript configuration convention
+### Соглашение о настройках TypoScript
 
-> Note: This convention applies only when you use an extension to store your templates and configuration, which is highly
-> recommended - and the officially preferred way.
+> Замечание: это соглашение применимо лишь тогда, когда для хранения шаблонов и настроек используется расширение, что крайне
+> рекомендуется и официально поддерживается.
 
-In order to use basic TypoScript configuration (such as the mandatory View paths) you should use the TYPO3/Extbase convention:
+Для базовой настройки TypoScript (вроде обязательных путей для режимов - View) необходимо использовать соглашение TYPO3/Extbase:
 
 ```php
 // in ext_tables.php
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Description of configuration');
 ```
 
-Which then expects a `setup.txt` and optional but also recommended `constants.txt` to be placed in the
-`EXT:myext/Configuration/TypoScript` folder. You are encouraged to use constants - you are always encouraged to do this when
-working with configuration-type TypoScript (as opposed to for example when you create COA objects). Since almost all TypoScript
-involved with any extension in this family is exactly configuration-type TypoScript, you should simply make a habit of using it
-always, for all of page-, content- and backend module templates.
+При этом ожидается, что `setup.txt` и не обязательно, но рекомендуемо, `constants.txt` будут помещены в папку
+`EXT:myext/Configuration/TypoScript`. Рекомендуется использовать константы (constants), они всегда крайне полезны при работе с
+TypoScript для настроек (в отличие от, например, создания объектов COA). Но так как практически весь TypoScript в любых
+расширениях подобного типа отвечает исключитеьно за настройки, необходимо взять в привычку всегда использовать константы для
+шаблонов любого типа: страниц, содержимого и модулей внутреннего интерфейса.
 
-Your settings should use the conventional scopes:
+Настройки должны использовать следующие области именования, обозначенные соглашением:
 
 ```txt
 # for frontend-related extensions
@@ -49,17 +51,19 @@ module.tx_myext.settings {
 }
 ```
 
-When you use these conventions the resulting code structures become universally understandable - even if you don't publish your
-work, you should still use the conventions if nothing else for your own benefit when later revisiting code.
+Следуя указанным соглашениям, структура кода становится понятной для всех, даже если расширение не является публичным,
+это поможет в дальнейшем вам же при ревизии кода.
 
-### Extension Key Registration
+### Регистрация ключа расширения
 
-> This is the preferred way to integrate with fluidcontent/fluidpages/fluidbackend and so on - it ensures a proper relation to an
-> extension and uses all known conventions from Extbase regarding where to expect template file locations, public assets etc.
-> The conventions for this particular type of integration are listed in a dedicated chapter in this file.
+> Это рекомендуемый способ интеграции с fluidcontent/fluidpages/fluidbackend и тому подобным,
+> что обеспечивает правильные связи с расширениями и использует все известные соглашения из Extbase относительно ожидаемого
+> местоположения файлов, ресурсов и тому подобных вещей.
+> Соглашения относительно конкретных типов интеграции указаны в соответствующей главе этого файла.
 
-This approach assumes you have an extension. It can be one which already contains site-oriented files for your specific site or
-you can just create one (See the chapter on "Building Code"). In your ext_tables.php file add the following registration code:
+Этот подход предполагает использование расширения. Оно уже может содержать файлы лишь для отдельного сайта,
+либо можно создать новое (смотрите главу в "Рекомендации по программированию"). В файле ext_tables.php добавьте следующий код
+для регистрации:
 
 ```php
 // $_EXTKEY = 'myext';
@@ -68,30 +72,33 @@ Tx_Flux_Core::registerProviderExtensionKey($_EXTKEY, 'Page'); // to register pag
 Tx_Flux_Core::registerProviderExtensionKey($_EXTKEY, 'Backend'); // to register backend module templates
 ```
 
-#### Implications
+#### Последствия
 
-The second parameter indicates the Controller name. This has the following implications:
+Второй параметр указывает на название контроллера (Controller) и имеет следующие последствия:
 
-* The expected Controller class name, if one exists, is Tx_Myext_Controller_ContentController. If this class exists it is used
-  when rendering your template file - note that this is the exact opposite of the usual Extbase plugin logic in which you would
-  call your controller which then tries to find a corresponding template. In this case, the template's connection to a Controller
-  action is detected and if the action corresponding to the template exists, it is called instead of using the built-in rendering.
-* TypoScript is expected to exist in `plugin.tx_myext.view.templateRootPath` at the very least. If your templates use them, add
-  paths for Partials and Layouts as well.
-* The expected template folder locations are in `Resources/Private/Templates` of your extension, or another if so changed in the
-  TypoScript configuration for your extension. The convention suggests using the path as in the example and you are highly
-  encouraged to use this location to make your extension much easier to understand. But you are free to use another location.
-  Note: to place your templates in `fileadmin´ (which is discouraged but still possible) see the chapter about non-extension paths.
-* If your templates use TypoScript, it should be placed in `plugin.tx_myext.settings` and will then be available in Fluid as
-  the "magic" template variable {settings} which does not need to be passed to Partials etc. to be accessed.
+* Ожидаемое название класса контроллера, если он имеется, то это будет Tx_Myext_Controller_ContentController. И этот класс
+используется для формирования шаблона из файлов. Обратите внимание, что это подход, обратный обычному для логики дополнений на
+Extbase, где необходимо сначала им самим вызвать контроллер, который, в свою очередь пытается найти соответствующий шаблон. В
+этом случае, обнаруживается действие из шаблона, подключенного к контроллеру, и, если такое действие в шаблоне имеется,
+то оно и используется вместо уже встроенного для формирования шаблона.
+* Ожидается, что в TypoScript имеется хотябы определение для `plugin.tx_myext.view.templateRootPath`. А если шаблон использует
+шаблонные части (Partials) и макеты (Layouts), то добавьте пути и для них.
+* Ожидается, что шаблоны располагаются в папке `Resources/Private/Templates` внутри расширения, либо другой,
+указанной в настройке TypoScript расширения. Соглашение рекомендует указанный путь, и это крайне рекомендуется делать для
+ упрощения работы с расширением. Конечно, ничто не запрещает выбрать и другое местоположение.
+  Замечание: чтобы поместить шаблоны в папке `fileadmin´ (что не рекомендуется, но все же возможно) обратитесь к главе о путях
+  вне расширений.
+* Если в шаблоне используется TypoScript, его необходимо разместить в `plugin.tx_myext.settings`, откуда он будет доступен во
+Fluid в виде "волшебной" переменной шаблона {settings}, которую можно не передавать в Partials и т. п. для восприятия её там.
 
-In all ways this is the preferred method of integration. It requires you to store your templates and asset files in an extension,
-which is a bit of a break if you were previously used to storing them in fileadmin (as with TemplaVoila) but consider for a moment
-the additional consistency you gain. The configuration paths follow every convention known from Extbase and Fluid, which means
-you also get the ability to add language files without using long paths to each file. There's of course more benefits from doing
-it this way - more than can be mentioned here - _please consider using this approach even if you are just making basic templates._
+Это предпочтительный метод интеграции. Он требует хранить файлы шаблонов и ресурсов в расширении, что немного непривычно,
+если вы привыкли хранить все это в папке fileadmin (как для TemplaVoila), но предпочтительнее с точки зрения последовательности
+ в создании шаблонов. Пути настроек согласуются со всеми правилами для Extbase и Fluid,
+ что дает возможность добавления языковых файлов без необходимости указания каждый раз длинных путей к файлу. Конечно,
+ выгда здесь значительно большая, чем возможно здесь вкратце описать - _рассмотрите возможность использования указанного
+ подхода, даже если создаете простейший шаблон._
 
-### Simple Template Path Registration
+### Простой способ регистрации пути к шаблону (Template)
 
 > This method is discouraged as it detaches your template files from an extension scope. You are encouraged to store your files
 > and configuration in an extension - this makes it easier to transport and allows you to use even more conventions to make the
@@ -107,9 +114,10 @@ plugin.tx_fluidpages.collections.mycollectionname.templateRootPath = fileadmin/t
 plugin.tx_fluidcontent.collections.mycollectionname.templateRootPath = fileadmin/templates/content/
 ```
 
-> Note: EXT:fluidbackend __does not support TypoScript paths this way; it requires the use of an extension - see above__.
+> Замечание: EXT:fluidbackend __не поддерживает такой способ указания путей в TypoScript, требуется использование расширения,
+об этом сказано выше__.
 
-#### Implications
+#### Последствия
 
 When you register template paths this way, without an extension being associated with them, you lose the following possibilities:
 
@@ -122,7 +130,7 @@ When you register template paths this way, without an extension being associated
 This may or may not present problems for your strategy - but even if you consider it acceptable to lose these capabilities, please
 do consider using an extension instead. It is, in every way, better in the long run and presents less hoops to jump through.
 
-### Legacy
+### Наследие
 
 The fluidpages and fluidcontent extensions still, for legacy reasons, support these configuration paths:
 

@@ -1,4 +1,4 @@
-## Fluid Powered TYPO3: Best Practice for Migrations
+## TYPO3 на базе Fluid: Best Practice for Migrations
 
 In case you started with EXT:fed some time ago, you will need to make some adjustments to port your existing FCE's and
 page layouts to EXT:fluidcontent and EXT:fluidpages.

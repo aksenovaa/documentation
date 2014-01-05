@@ -11,5 +11,10 @@
         </value>
       </option>
     </inspection_tool>
+    <inspection_tool class="SpellCheckingInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="processCode" value="true" />
+      <option name="processLiterals" value="false" />
+      <option name="processComments" value="true" />
+    </inspection_tool>
   </profile>
 </component>

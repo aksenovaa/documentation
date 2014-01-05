@@ -1,9 +1,9 @@
-Fluid Powered TYPO3: Concepts - Templates
+TYPO3 на базе Fluid: Concepts - Templates
 =========================================
 
 ## Foreword
 
-Templates rendered through Flux - which almost all templates in Fluid Powered TYPO3 are - are only slighly different from normal
+Templates rendered through Flux - which almost all templates in TYPO3 на базе Fluid are - are only slighly different from normal
 Fluid templates. This concept description focuses on the differences and only mentions the rough outlines of many settings and
 ViewHelpers which you can use to configure your templates. You should be at least somewhat familiar with how to use Fluid
 templates in Extbase extensions before reading this.
@@ -62,7 +62,7 @@ displays a simple "My content element" text without any HTML container element.
 
 ## Layouts and Partials
 
-Just like in any other Fluid template you can use any Layout name you choose. We on the Fluid Powered TYPO3 team suggest you use
+Just like in any other Fluid template you can use any Layout name you choose. We on the TYPO3 на базе Fluid team suggest you use
 the names `Default`, `Content`, `CoreContent` and `Page` as needed. This list shows when to use which name:
 
 * `Page` when the Layout is to be used with Page templates through `fluidpages`. It is suggested that all page templates share a
@@ -76,7 +76,7 @@ the names `Default`, `Content`, `CoreContent` and `Page` as needed. This list sh
   HTML is this simple, sharing a Layout file gives you a small performance boost and increases transparency - compiling one file
   is naturally faster than multiple files, and having one file to look at greatly increases your chance to find the right one ;)
 
-Other than these naming conventions there are no particular rules or recommendations for Layouts set by Fluid Powered TYPO3. It is
+Other than these naming conventions there are no particular rules or recommendations for Layouts set by TYPO3 на базе Fluid. It is
 completely up to you as developer/designer to decide what, if anything, your Layouts should contain.
 
 Partials are completely free to be used whenever you want, for whatever you want. They can contain shared Previews, common Flux
@@ -99,7 +99,7 @@ follow the same procedure.
 
 ### Alternative to templates
 
-> Careful! Some features from Fluid Powered TYPO3 will require template files containing a `Configuration` section and a
+> Careful! Some features from TYPO3 на базе Fluid will require template files containing a `Configuration` section and a
 > `flux:form` tag. While it is possible to get around even this requirement, it involves creating a custom Provider to take the
 > place of a Provider included with the extension, e.g. `fluidcontent` ContentProvider, `fluidpages` PageProvider, and so on.
 > By replacing Providers you can change almost all aspects of how a certain feature works, fitting it to your site in exactly the

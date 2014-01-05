@@ -1,6 +1,6 @@
-## Fluid Powered TYPO3 Cookbook: Wireframe Page Template
+## TYPO3 на базе Fluid Cookbook: Wireframe Page Template
 
-> Author: Claus Due, Fluid Powered TYPO3 team. License: [GPLv3](http://www.gnu.org/copyleft/gpl.html.)
+> Author: Claus Due, TYPO3 на базе Fluid team. License: [GPLv3](http://www.gnu.org/copyleft/gpl.html.)
 
 ### Purpose: site wireframing without editing template files
 
