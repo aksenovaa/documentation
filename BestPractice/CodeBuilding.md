@@ -1,58 +1,59 @@
-## TYPO3 на базе Fluid: Best Practice for Code Building
+## TYPO3 на базе Fluid: лучшие решения по программированию
 
-This section of the documentation describes how to build code automatically. There are a few features in the TYPO3 на базе Fluid
-family which enable automatic code generation based on conventions. The first and most important such feature is the code
-generation features of EXT:builder which can be found on Github: [https://github.com/FluidTYPO3/builder](https://github.com/FluidTYPO3/builder).
+Этот раздел документации посвящён решениям по автоматическому формированию кода. Существует несколько решений для
+автоматического формирования кода расширений TYPO3 на базе Fluid, работающих с учётом всех правил. Первое,
+и наиболее важное из таких решений по формированию кода - это EXT:builder, которое можно найти на Github:
+[https://github.com/FluidTYPO3/builder](https://github.com/FluidTYPO3/builder).
 
-EXT:builder provides a few methods to validate and build code.
+EXT:builder предлагает несколько методов про проверке и построению кода.
 
-### Generating a Provider Extension
+### Формирование расширений поставщиков (Provider Extension)
 
-By running this CLI Command made available by EXT:builder, you can create a skeleton extension with a basic set of files and
-configuration by using just a single command (from your TYPO3 document root):
+Запущенная из консоли эта CLI команда, доступная при установленном EXT:builder, создаст каркас расширения с базовым набором 
+файлов и настроек, и все - лишь одной простой командой (из корня сайта TYPO3):
 
 ```bash
 ./typo3/cli_dispatch.phpsh extbase builder:providerextension <arguments>
 ```
 
-The command supports a wide range of arguments to affect which features the extension should use and how it should be built.
+Команда поддерживает большой набор аргументов для настройки формируемого расширения относительно его предназначения и создания.
 
 ```plain
-REQUIRED ARGUMENTS:
-  --extension-key      The extension key which should be generated. Must not
-                       exist in the typo3conf/ext folder.
-  --author             The author of the extension, in the format "Name
-                       Lastname <name@example.com>" with optional company name,
-                       in which case form is "Name Lastname <name@example.com>,
-                       Company Name"
+ОБЯЗАТЕЛЬНЫЕ АРГУМЕНТЫ:
+  --extension-key      Ключ формируемого расширения, которого не должно 
+                       быть в папке typo3conf/ext.
+  --author             Автор расширения, в формате "Имя Фамилия 
+                       <name@example.com>" с необязательным названием 
+                       компании, при этом форма будет следующей: "Имя 
+                       Фамилия <name@example.com>, Компания"
 
-OPTIONAL ARGUMENTS:
-  --title              The title of the resulting extension, by default
+ВОЗМОЖНЫЕ АРГУМЕНТЫ:
+  --title              Название формируемого расширения, по умолчанию 
                        "Provider extension for $enabledFeaturesList"
-  --description        The description of the resulting extension, by default
+  --description        Описание формируемого расширения, по умолчанию 
                        "Provider extension for $enabledFeaturesList"
-  --use-vhs            If TRUE, adds the VHS extension as dependency -
-                       recommended, on by default
-  --pages              If TRUE, generates basic files for implementing Fluid
-                       Page templates
-  --content            IF TRUE, generates basic files for implementing Fluid
-                       Content templates
-  --backend            If TRUE, generates basic files for implementing Fluid
-                       Backend modules
-  --controllers        If TRUE, generates controllers for each enabled feature.
-                       Enabling $backend will always generate a controller
-                       regardless of this toggle.
-  --minimum-version    The minimum required core version for this extension,
-                       defaults to latest LTS (currently 4.5)
-  --dry                If TRUE, performs a dry run: does not write any files
+  --use-vhs            Если TRUE, добавляется зависимость от расширения VHS, что 
+                       рекомендуется, включено по умолчанию
+  --pages              Если TRUE, создаются основные файлы, применительно к
+                       шаблонам Fluid Page
+  --content            Если TRUE, создаются основные файлы, применительно к
+                       шаблонам Fluid Content
+  --backend            Если TRUE, создаются основные файлы, применительно к
+                       модулям Fluid Backend
+  --controllers        Если TRUE, формируются контроллеры для всех указанных
+                       функций. При включении $backend, контроллер создается
+                       не взирая на этот аргумент.
+  --minimum-version    Минимально требуемая для этого расширения версия ядра,
+                       по умолчанию - последняя LTS (на данный момент 4.5)
+  --dry                Если TRUE, performs a dry run: does not write any files
                        but reports which files would have been written
   --verbose            If FALSE, suppresses a lot of the otherwise output
                        messages (to STDOUT)
-  --git                If TRUE, initialises the newly created extension
+  --git                Если TRUE, initialises the newly created extension
                        directory as a Git repository and commits all files. You
                        can then "git add remote origin <URL>" and "git push
                        origin master -u" to push the initial state
-  --travis             If TRUE, generates a Travis-CI build script which uses
+  --travis             Если TRUE, generates a Travis-CI build script which uses
                        TYPO3 на базе Fluid coding standards analysis and code
                        inspections to automate testing on Travis-CI
 ```

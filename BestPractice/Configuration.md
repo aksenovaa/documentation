@@ -119,28 +119,28 @@ plugin.tx_fluidcontent.collections.mycollectionname.templateRootPath = fileadmin
 
 #### Последствия
 
-When you register template paths this way, without an extension being associated with them, you lose the following possibilities:
+При регистрации путей к шаблону указанным способом, без ассоциации с ним расширения, теряются следующие возможности:
 
-* You cannot use `<f:translate>` and other ViewHelpers which use an extension context to determine which files to use; when using
-  such ViewHelpers you are required to use a full LLL:... path in the `key` attribute.
-* You cannot use TypoScript settings unless your templates make use of `<v:var.typoscript>` to read them, which adds overhead.
-* You cannot override LLL labels through TypoScript which you would be able to do if the LLL was in an extension.
-* Templates will render in the scope of the extension which renders the template - e.g. fluidcontent, fluidpages, fluidbackend.
+* Невозможно использование `<f:translate>` и других проекторов (ViewHelpers), использующих контекст расширения для определения
+используемых ими файлов; если же они используются, необходимо использовать полный путь LLL:... в атрибуте `key`.
+* Невозможно использовать настройки TypoScript, если только не воспользоваться `<v:var.typoscript>` для их чтения,
+что добавляет сложности.
+* Невозможно переназначить метки LLL через TypoScript, что было бы возможно, если бы метки LLL были бы в расширении.
+* Шаблон будет формироватся в области расширения, выводящего его, то есть - fluidcontent, fluidpages, fluidbackend.
 
-This may or may not present problems for your strategy - but even if you consider it acceptable to lose these capabilities, please
-do consider using an extension instead. It is, in every way, better in the long run and presents less hoops to jump through.
+Это может стать проблемой, а может и нет, но даже если потеря указанных вожможностей не важна,
+подумайте вместо этого об использовании расширения. Это в любом случае выигрышней с долгосрочной перспективы и менее затратно.
 
 ### Наследие
 
-The fluidpages and fluidcontent extensions still, for legacy reasons, support these configuration paths:
+Расширения fluidpages и fluidcontent все еще, по соображениям совместимости, поддерживают следующие пути:
 
 ```txt
 plugin.tx_fed.fce.mycollectionname.templateRootPath = ...
 plugin.tx_fed.page.mycollectionname.templateRootPath = ...
 ```
+Они рассматриваются как устаревшие, но на данный момент все еще нет решения по их удалению.
 
-These are considered deprecated. No schedule for removal exists at the time of writing this.
-
-Whenever you see these, please change them to either use the "Simple Template Path Registration" paths (e.g.
-`plugin.tx_fluidpages.collections.mycollectionname.templateRootPath` etc) or if at all possible, transfer them to an extension and
-use the recommended extension key based registration.
+Но если они попадутся, измените их, либо используя "Простой способ регистрации пути к шаблону" (например,
+`plugin.tx_fluidpages.collections.mycollectionname.templateRootPath` и т. п.), либо, если это вообще возможно,
+переместите их в расширение и используйте рекомендуемую регистрацию на основе ключа расширения.

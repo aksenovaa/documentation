@@ -13,12 +13,12 @@ TYPO3 на базе Fluid: документация
   Руководство в форме книги, которую можно прочитать от корки до корки. Здесь говориться о базовых концепциях, справедливых для всех расширений.
 * [Передовой опыт](BestPractice/)
   Передовой опыт во всех областях, связанных с созданием сайтов на основе расширений Fluid TYPO3. А именно:
-  * [Советы и рекомендации по Настройкам](BestPractice/Configuration.md)
-  * [Советы и рекомендации по программированию](BestPractice/CodeBuilding.md)
-  * [Советы и рекомендации по миграции ресурсов и настроек (Setups)](BestPractice/Migration.md)
-  * [Советы и рекомендации по созданию шаблонов содержимого (Content Template)](BestPractice/Content.md)
-  * [Советы и рекомендации по созданию шаблонов страниц (Page Template)](BestPractice/Pages.md)
-  * [Советы и рекомендации по интеграции дополнений (Plugin)](BestPractice/Plugins.md)
+  * [Лучшие решения по Настройкам](BestPractice/Configuration.md)
+  * [Лучшие решения по программированию](BestPractice/CodeBuilding.md)
+  * [Лучшие решения по миграции ресурсов и настроек (Setups)](BestPractice/Migration.md)
+  * [Лучшие решения по созданию шаблонов содержимого (Content Template)](BestPractice/Content.md)
+  * [Лучшие решения по созданию шаблонов страниц (Page Template)](BestPractice/Pages.md)
+  * [Лучшие решения по интеграции дополнений (Plugin)](BestPractice/Plugins.md)
 * [Руководства](Guides/)
   Набор руководств по использованию Flux API. А именно:
   * [Руководство по использованию компонентов форм - FormComponent](Guides/FormComponent.md)
