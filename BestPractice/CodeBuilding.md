@@ -26,85 +26,79 @@ EXT:builder предлагает несколько методов про про
 
 ВОЗМОЖНЫЕ АРГУМЕНТЫ:
   --title              Название формируемого расширения, по умолчанию "Provider extension for $enabledFeaturesList"
-  --description        Описание формируемого расширения, по умолчанию 
-                       "Provider extension for $enabledFeaturesList"
-  --use-vhs            Если TRUE, добавляется зависимость от расширения VHS, что 
-                       рекомендуется, включено по умолчанию
-  --pages              Если TRUE, создаются основные файлы, применительно к
-                       шаблонам Fluid Page
-  --content            Если TRUE, создаются основные файлы, применительно к
-                       шаблонам Fluid Content
-  --backend            Если TRUE, создаются основные файлы, применительно к
-                       модулям Fluid Backend
-  --controllers        Если TRUE, формируются контроллеры для всех указанных
-                       функций. При включении $backend, контроллер создается
-                       не взирая на этот аргумент.
-  --minimum-version    Минимально требуемая для этого расширения версия ядра,
-                       по умолчанию - последняя LTS (на данный момент 4.5)
-  --dry                Если TRUE, performs a dry run: does not write any files
-                       but reports which files would have been written
-  --verbose            If FALSE, suppresses a lot of the otherwise output
-                       messages (to STDOUT)
-  --git                Если TRUE, initialises the newly created extension
-                       directory as a Git repository and commits all files. You
-                       can then "git add remote origin <URL>" and "git push
-                       origin master -u" to push the initial state
-  --travis             Если TRUE, generates a Travis-CI build script which uses
+  --description        Описание формируемого расширения, по умолчанию "Provider extension for $enabledFeaturesList"
+  --use-vhs            Если TRUE, добавляется зависимость от расширения VHS, что рекомендуется, включено по умолчанию
+  --pages              Если TRUE, создаются основные файлы, применительно к шаблонам Fluid Page
+  --content            Если TRUE, создаются основные файлы, применительно к шаблонам Fluid Content
+  --backend            Если TRUE, создаются основные файлы, применительно к модулям Fluid Backend
+  --controllers        Если TRUE, формируются контроллеры для всех указанных функций. При включении $backend,
+                       контроллер создается не взирая на этот аргумент.
+  --minimum-version    Минимально требуемая для этого расширения версия ядра, по умолчанию - последняя LTS (на данный момент 4.5)
+  --dry                Если TRUE, происходит холостой запуск - никакие файлы не создаются,
+                       но дается отчет по возможности создания файлов
+  --verbose            Если FALSE, не выводится множество сообщений (в STDOUT)
+  --git                Если TRUE, вновь создаваемая директория расширения инициализируется как репозиторий Git и commits
+                       для всех файлов. Затем возможно "git add remote origin <URL>" и "git push origin master -u"
+                       для возвращения (push) начального состояния
+  --travis             Если TRUE, формирутся сценарий построения Travis-CI использующий стандарты кодирования и анализа кода
                        TYPO3 на базе Fluid coding standards analysis and code
-                       inspections to automate testing on Travis-CI
+                       для автоматического тестирования в Travis-CI
 ```
 
-Depending on which toggles you use, template files will be built for EXT:fluidcontent, EXT:fluidpages and/or EXT:fluidbackend,
-all containing a basic set of configuration enabling the file to be used by each extension. To make a "dry run" specify `--dry 1`
-which means no files/folders are written but the intent to create each file/folder is output instead. You can even initialise
-and initially commit all files as a git repository (requires the `git` CLI command to be available to the current shell user).
+В зависимости от используемых параметров, будут созданы файлы шаблонов для EXT:fluidcontent,
+EXT:fluidpages и/или EXT:fluidbackend с базовым набором настроек, файлов, необходимых для всех подобных расширений. Чтобы
+проверить работу, укажите `--dry 1`, это значит, что файлы/папки не будут созданы, но будет проверена возможность их создания.
+Возможно даже инициализировать и провести изначальный commit всех файлов в виде git репозитория (требуется доступ к консольной
+CLI команде `git` для текущего пользователя).
 
-For example, such a build command might look like:
+Такая команда может выглядеть так:
 
 ```shell
 ./typo3/cli_dispatch.phpsh extbase builder:providerextension test "Claus Due <claus@wildside.dk>" \
 	--pages 1 --content 1 --controllers 1 --git 1 --travis 1 --use-vhs 1
 ```
 
-Which would generate the extension key `test` authored by `Claus Due` with email `claus@wildside.dk` and include page and content
-templates as well as controller classes for each, a Travis-CI build script to go along with the extension and finally will create
-a git repository in the extension folder and initially commit all files.
+Так будет сформировано расширение с ключом `test` автора `Claus Due` с email `claus@wildside.dk`,
+включающее шаблоны page и content, наряду с классами контроллеров для обоих, сценарий построения Travis-CI для всего расширения.
+И наконец будет создан репозиторий git в папке расширения с изначальным commit всех файлов.
 
-You can then very easily install the generated extension also from the command line:
+Сформированное расширение затем можно запросто установить, также из командной строки:
 
 ```shell
 ./typo3/cli_dispatch.phpsh extbase builder:install test
 ```
 
-Which simply installs the extension key "test" (note: this feature only works on 6.0+ TYPO3 sites). All you then need to do is
-load the static TypoScript into each root template where you want the content/page templates to be available - and start adding
-your own templates or adjusting the pre-built placeholder templates.
+Так можно просто установить расширение с ключом "test" (обратите внимание: эта возможость работает лишь для сайтов на 6.0+ TYPO3).
+Все, что остается сделать - загрузить статический TypoScript в каждый из корневых шаблонов страниц,
+где необходимо использовать шаблоны содержимого/страниц и начать создавать собственныеили настраивать преднастроенные шаблоны.
 
-### Generating unit and functional tests
+### Создание модульного (unit) и функционального (functional) тестирования
 
-When you are "done" (if such a thing is possible) with your templates and classes related to your templates - Controllers,
-ViewHelpers etc. - EXT:builder allows you to generate unit and functional tests for automateed testing of your code. There are
-commands to generate ViewHelper class unit tests (for when you create custom ViewHelpers) and further test creation is planned
-(for example: template validation based tests so phpunit will catch any Fluid syntax errors or incorrect arguments used).
+Как только закончите (если это вообще возможно) со своими шаблонами и связанными с ними классами - контроллерами,
+проекторами (ViewHelpers) и тому подобным, EXT:builder позволит сформировать модульные (unit) и функциональные (functional)
+тесты для автоматического тестирования кода. Команды для формирования модульных тестов для проекторов (ViewHelper,
+при их создании), и других тестов запланированы (например, базовые тесты проверки шаблона,
+так phpunit сможет отлавливать все синтаксические ошибки и неверно используемые аргументы).
 
-There are even commands in EXT:builder to perform inspections of your templates, reporting any bad arguments or obvious syntax
-problems (which you may not detect, for example if you change a custom ViewHelper's name or arguments and forget about a template
-which uses the old names) and detecting problems in your PHP code. More analysis features are planned, for example ones to detect
-problems in annotations used for example in Controllers, validating them to ensure required class types exist - and more.
+В EXT:builder имеются команды для проверки шаблонов, сообщении о любых неверных аргументах или очевидных проблемах в синтаксисе
+ (которые сложно определить, например, если изменяется название созданного проектора или аргумента,
+ а в шаблоне используется старые названия), а также определение проблем в коде PHP. Запланированы и другие функции анализа,
+ например, определение проблем в аннотациях, используемых к примеру  контроллерах, проверка их на предмет существования
+ требуемых типов классов, и многое другое.
 
-### Using Travis-CI
+### Использование Travis-CI
 
-[Travis CI](https://travis-ci.org/) is a service that is free to use for OpenSource projects - what it provides is a way to run
-automated "builds" of your code, using scripts you can configure. EXT:builder can create a Travis build configuration which uses
-TYPO3 на базе Fluid standards and code inspections to check your code. When built (and activated in Travis-CI by signing up and
-switching on your repository in the list of your repositories), the Travis-CI script will automatically install dependencies as
-required by your extension. EXT:builder is then used to perform a range of tests and finally, phpunit is called on to run any unit
-tests your extension may contain (which includes tests built by using EXT:builder itself).
+[Travis CI](https://travis-ci.org/) сервис, который возможно свободно использовать для OpenSource проектов,
+он позволяет автоматически "строить" свой код при помощи настраиваемых сценариев. EXT:builder может создавать настройки,
+учитывающие стандарты TYPO3 на базе Fluid и инспекцию кода. При построении (и активации в Travis-CI путём подписания
+подключения репозитория к списку своих репозитриев), сценарий Travis-CI автоматически установит зависимости,
+требуемые расширением. EXT:builder затем используется для проведения серии тестов и наконец вызывается phpunit для проведения
+любых модульных (unit) тестов для расширения (в том числе и тестов, созданных самим EXT:builder).
+Как только в основную ветвь (master branch) будут посланы запросы pull или push, Travis выполнит сценарий построения и
+отчитается о любой появившейся проблеме владельцу репозитория.
+[Пример постройки Travis; для самого EXT:builder](https://travis-ci.org/FluidTYPO3/builder) и
+[сценарий, настраивающий такую постройку](https://github.com/FluidTYPO3/builder/blob/master/.travis.yml).
 
-Whenever you receive pull requests or push to your master branch, Travis will execute the build script and report any problems to
-you, the repository owner. [An example of a Travis build; for EXT:builder itself](https://travis-ci.org/FluidTYPO3/builder) and
-[the script which configures that build](https://github.com/FluidTYPO3/builder/blob/master/.travis.yml).
-
-Since even the most basic automated Travis-CI script written by EXT:builder will perform many tests on syntax in both PHP and
-Fluid you are highly encouraged to use Travis-CI. But you can of course also perform the tests as needed, simply by running the
-approproate CLI command from EXT:builder's list of commands.
+Поскольку даже наиболее простые сценарии автоматизации Travis-CI, написанные EXT:builder, будут проводить множество тестов над
+синтаксисом как PHP, так и Fluid, настоятельно советуем использовать Travis-CI. Конечно, можно проводить тестирование по мере
+необходимости, просто выполнив соответствующую команду CLI из списка команд EXT:builder.

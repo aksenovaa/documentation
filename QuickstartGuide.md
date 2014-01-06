@@ -6,12 +6,12 @@ templates and content elements using the [FluidTYPO3](http://github.com/FluidTYP
 You can code along this post or grab a copy of [@cedricziel's](http://twitter.com/cedricziel)
 [ft3_empty](http://github.com/FluidTYPO3/ft3_empty) to copy the basic structure and required files.
 
-## Step 1: Install the required extensions
+## Шаг 1: Install the required extensions
 
 We need: ``flux``, ``fluidpages``, ``fluidcontent`` and ``vhs``. Install them as usual through the extension manager,
 set Flux' debug mode to ``1`` and check the rewriting of LLL files while you are at it.
 
-## Step 2: Create a provider extension
+## Шаг 2: Create a provider extension
 
 This means a really minimalistic extension that will contain all your templates, typoscript and assets in one package.
 To do so come up with a short name for your extension and create a folder in ``typo3conf/ext/`` (for simplicity go for
@@ -130,7 +130,7 @@ later:
 You should now find your provider extension in the extension manager: Go ahead, install it, include its static typoscript
 in _your root template_ and remove any possible PAGE objects from your root template.
 
-## Step 3: Create a page template
+## Шаг 3: Create a page template
 
 A page template consists of two parts: a layout and a template file. _Layouts_ build the HTML 'skeleton' of your page (the
 part between the ``body`` tags) and define the dynamic parts with 'sections'. The representation for the backend of those
@@ -292,7 +292,7 @@ most important being ``name`` and ``path`` which should be self-explanatory. The
 convention but it's common practice to use the name. Now, make sure those files exist, clear your caches and have a look
 at the HTML source of your page to find the assets being included (JS at the bottom of the page).
 
-## Step 4: Custom content elements
+## Шаг 4: Custom content elements
 
 Content elements are defined similar to page templates and consist of a layout and a template file. Typically the layout
 simply renders the main section of the template and is shared with several content elements:
