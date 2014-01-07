@@ -1,22 +1,23 @@
 ## Краткое руководство по TYPO3 на базе Fluid
 
-Fed up with TemplaVoilà (which is end of life anyway)? Here's a squeezed guide to get you started with creating page
-templates and content elements using the [FluidTYPO3](http://github.com/FluidTYPO3) family of extensions.
+Fed с TemplaVoilà (находящаяся в конце своего пути)? Это - краткое руководство по началу создания шаблонов страниц и элементов
+содержимого, используя семейство расширений [FluidTYPO3](http://github.com/FluidTYPO3).
 
-You can code along this post or grab a copy of [@cedricziel's](http://twitter.com/cedricziel)
-[ft3_empty](http://github.com/FluidTYPO3/ft3_empty) to copy the basic structure and required files.
+Можно писать код по мере чтения этого документа, либо скопировать его с [@cedricziel's](http://twitter.com/cedricziel)
+[ft3_empty](http://github.com/FluidTYPO3/ft3_empty), это базовая структура и необходимые файлы.
 
-## Шаг 1: Install the required extensions
+## Шаг 1: Установка необходимых расширений
 
-We need: ``flux``, ``fluidpages``, ``fluidcontent`` and ``vhs``. Install them as usual through the extension manager,
-set Flux' debug mode to ``1`` and check the rewriting of LLL files while you are at it.
+Нам понадобитятся: ``flux``, ``fluidpages``, ``fluidcontent`` и ``vhs``. Установите их как обычно через модуль управления
+расширениями, установите во Flux debug mode (режим отладки) в ``1`` и отметьте rewriting of LLL files (перезапись LLL файлов),
+если это нужно.
 
-## Шаг 2: Create a provider extension
+## Шаг 2: Создайте расширение поставщик (provider extension)
 
-This means a really minimalistic extension that will contain all your templates, typoscript and assets in one package.
-To do so come up with a short name for your extension and create a folder in ``typo3conf/ext/`` (for simplicity go for
-all lowercase letters). We are really creative and name our example ``quickstart``. Inside that folder we create a
-couple more and add some default files:
+То есть маленькое расширение, содержащее все необходимые шаблоны, typoscript и ресурсы в одном пакете. Для этого придумайте
+короткое название для расширения и создайте папку в ``typo3conf/ext/`` (проще и лучше использовать все буквы в нижнем регистре).
+Мы очень находчивы и для примера взяли название ``quickstart``. Внутри этой папки мы создали еще несколько и добавили
+необходимые файы:
 
 ```
 typo3conf/ext/quickstart
@@ -38,8 +39,8 @@ __ ext_icon.gif
 __ ext_tables.php
 ```
 
-``setup.txt`` contains typoscript to configure the view by defining where our template files are located (as in any
-other Extbase extension):
+``setup.txt`` содержит typoscript для настройки режимов (view) по умолчанию - пути к файлам шаблонов (как и в любых других
+расширениях Extbase):
 
 ```
 plugin.tx_quickstart.view {
@@ -49,11 +50,11 @@ plugin.tx_quickstart.view {
 }
 ```
 
-> Note the _extension key_ which is a ``tx_`` prefixed, lowercase version of the _extension name_. Later you will define
-> some more settings here which will be available in your templates then.
+> Обратите внимание, что _ключ расширения_ имеет приставку ``tx_``, указан в нижнем регистре. Далее будут определены другие
+> настройки, которые затем будут доступны внутри шаблонов.
 
-``ext_tables.php`` includes this very typoscript and configures Flux by registering our extension as a provider for page
-and content templates:
+``ext_tables.php`` включает небольшой typoscript и настраивает Flux, регистрируя наше расширение в качестве поставщика шаблонов
+ для страниц и содержимого:
 
 ```php
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Quickstart: a sample extension');
@@ -62,8 +63,9 @@ Tx_Flux_Core::registerProviderExtensionKey($_EXTKEY, 'Page');
 Tx_Flux_Core::registerProviderExtensionKey($_EXTKEY, 'Content');
 ```
 
-You can copy ``ext_emconf.php`` from some other extension (like [ft3_empty](http://github.com/FluidTYPO3/ft3_empty)) and
-change it accordingly or use the exension builder to create a fresh one. Here's an example how it should look like:
+Можно скопировать ``ext_emconf.php`` из любого другого расширения (вроде [ft3_empty](http://github.com/FluidTYPO3/ft3_empty)) и
+ изменить его под своё расширение, либо воспользоваться расширением builder для создания с нуля. Вот пример того,
+ как он должен выглядеть:
 
 ```php
 $EM_CONF[$_EXTKEY] = array(
@@ -107,11 +109,10 @@ $EM_CONF[$_EXTKEY] = array(
 );
 ```
 
-``ext_icon.gif`` is a 16x16 pixel icon which will show up in the extension manager and can be copied from some this or
-some other extension as well.
+``ext_icon.gif`` это значок, размером 16x16 пикселей, который будет выводиться в модуле управления расширением,
+его можно скопировать с этого, или любого другого подобного расширения.
 
-``locallang.xml`` contains a skeleton XML structure for translation of labels and will be populated atomagically by Flux
-later:
+``locallang.xml`` содержит основу XML структуры для переводимых меток, позже он будет автоматически заполняться из Flux:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
@@ -127,16 +128,17 @@ later:
  </T3locallang>
 ```
 
-You should now find your provider extension in the extension manager: Go ahead, install it, include its static typoscript
-in _your root template_ and remove any possible PAGE objects from your root template.
+Теперь новое расширение проводник возможно найти в модуле управления расширениями: перейдите в него, установите расширение,
+подключите статический typoscript из расширения в _корневой TS шаблон_ и удалите все другие объекты PAGE из корневого шаблона.
 
-## Шаг 3: Create a page template
+## Шаг 3: Создание шаблона страницы
 
-A page template consists of two parts: a layout and a template file. _Layouts_ build the HTML 'skeleton' of your page (the
-part between the ``body`` tags) and define the dynamic parts with 'sections'. The representation for the backend of those
-sections and any additional fields are defined in _templates_. To give you a better idea about that here's an example:
+Шаблон страницы состоит из двух частей: файлов макета (layout) и шаблона (template). _Макеты (Layouts)_ строят HTML 'скелет'
+страницы (часть между тегами ``body``) и определяют динамические части при помощи разделов - 'sections'. А для внутреннего
+интерфейса (backend) эти разделы (sections) и любые другие дополнительные поля определяются в шаблонах - _templates_. Чтобы
+лучше понять это, воспользуйтесь приведенным ниже примером:
 
-Layout file ``typo3conf/ext/quickstart/Resources/Private/Layouts/Foo.html``
+Файл макета (Layout) ``typo3conf/ext/quickstart/Resources/Private/Layouts/Foo.html``
 
 ```html
 <f:layout name="Foo"/>
@@ -151,7 +153,7 @@ Layout file ``typo3conf/ext/quickstart/Resources/Private/Layouts/Foo.html``
 </div>
 ```
 
-Template file ``typo3conf/ext/quickstart/Resources/Private/Templates/Page/Foo.html``
+Файл шаблона (Template) ``typo3conf/ext/quickstart/Resources/Private/Templates/Page/Foo.html``
 
 ```html
 {namespace flux=Tx_Flux_ViewHelpers}
@@ -196,14 +198,15 @@ Template file ``typo3conf/ext/quickstart/Resources/Private/Templates/Page/Foo.ht
 </div>
 ```
 
-### Let's see what we've got here
+### Посмотрим, что мы здесь имеем
 
-We implement a page template named _Foo_. To 'connect' template and layout they are equally named ``Foo.html`` and both
-declare ``<f:layout name="Foo"/>``.
+Мы создали шаблон страницы с названием _Foo_. Чтобы связать шаблон (template) с макетом (layout) они оба названы ``Foo.html`` и
+ в обоих указано ``<f:layout name="Foo"/>``.
 
-> The div containers' only purpose is to
-[enable code completion in your favorite IDE](http://buzz.typo3.org/teams/extbase/article/howto-autocompletion-for-fluid-in-phpstorm)
-and will not be output.
+> Предназначение контейнеров div лишь
+[включение автозавершения кода в любимой вами IDE]
+(http://buzz.typo3.org/teams/extbase/article/howto-autocompletion-for-fluid-in-phpstorm)
+и они не будут выводиться на сайте.
 
 The layout contains some simple HTML structure with two content areas and the outer div container's CSS class is controlled
 by a Fluid variable ``{settings.pageClass}``. The variable is prefixed ``settings.`` which is not required by configuration
