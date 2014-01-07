@@ -208,21 +208,22 @@ $EM_CONF[$_EXTKEY] = array(
 (http://buzz.typo3.org/teams/extbase/article/howto-autocompletion-for-fluid-in-phpstorm)
 и они не будут выводиться на сайте.
 
-The layout contains some simple HTML structure with two content areas and the outer div container's CSS class is controlled
-by a Fluid variable ``{settings.pageClass}``. The variable is prefixed ``settings.`` which is not required by configuration
-but very useful. This will become clear at a later stage.
+Макет (layout) содержит лишь простейшую структуру HTML с двумя областями для содержимого и внешним контейнером div с классом,
+определяемым переменной Fluid ``{settings.pageClass}``. В названии переменной используется приставка ``settings.``,
+что не требуется для настройки, но очень полезно, почему, станет понятно позже.
 
-> Per convention layouts have to define a ``<f:section name="Main"/>`` which is the section that will finally get rendered.
+> По правилам, в макетах (layouts) имеется ``<f:section name="Main"/>``, именно она и выводиться в итоге на страницы сайта.
 
-The template defines the backend representation of this layout by providing a flexform and a backend layout grid (only
-available in TYPO3 6.x and greater). This flexform is defined with ``flux`` viewhelpers which makes that part really
-simple.
+Шаблон (template) определяет представление макета (layout) посредством форм настроек - flexform и сетки внутреннего макета -
+backend layout grid (доступны, начиная с TYPO3 6.x). Форма настроек (flexform) определяется через проекторы (viewhelpers)
+``flux``, которые сильно упрощают их создание.
 
-> The bare minimum for a page layout file is to define a section named _Configuration_ containing a flexform with at least
-an _id_ to make it selectable in the backend.
+> Необходимый минимум для файла макета страницы (layout) - определить раздел (section) с названием _Configuration_,
+содержащей форму настроек - flexform, с указанием, по крайней мере,  _id_, чтобы сделать возможным выбор её во внутреннем
+интерфейсе (backend).
 
-In our example we add an input field for the CSS class which is then available in the layout as a Fluid variable of the
-same name:
+В нашем примере мы добавили поле ввода (input) для класса CSS, который затем становиться доступен в макете (layout) в виде
+переменной Fluid с тем же названием:
 
 ```html
 <flux:flexform id="foo">
@@ -234,7 +235,7 @@ same name:
 
 </flux:flexform>
 ```
-and a grid that will be used as the backend layout:
+и сетку (grid), котрая будет использоваться в макете внутреннего интерфейса (backend layout):
 
 ```html
 <flux:flexform id="foo">
@@ -252,28 +253,30 @@ and a grid that will be used as the backend layout:
 </flux:flexform>
 ```
 
-The sections _Content_ and _Sidebar_ make use of a ``vhs`` viewhelper to render the content of those columns.
+Разделы _Content_ и _Sidebar_ используют проектор (viewhelper) ``vhs`` для вывода содержимого в эти столбцы (column).
 
-> All available viewhelpers and their arguments can be looked up in the reference on
+> Все возможные проекторы (viewhelpers) и их аргументы можно найти в справочнике на страницах
 [fedext.net](http://fedext.net/viewhelpers.html)
 
-You should now be able to select the page layout in the backend by editing a page's properties after clearing all caches.
-``fluidpages`` includes some fine inheritance feature that enables you to select the page template not only for the current
-page but also for its children and the chain of inheritance can be interrupted at any level.
+Теперь должно быть возможным выбрать макет страницы (layout) из внутреннего интерфейса,
+отредактировав свойства страници и очистив все кеши. ``fluidpages`` имеет некоторые превосходные возможности наследования,
+которые делают возможным выбор шаблона не только для текущей страницы, но и для ее потомков. Такая цепочка наследования
+может быть разорвана на любом уровне.
 
-### But those weird labels?
+### Что такое эти странные метки (labels)?
 
-If you enabled the LLL rewrite feature in ``flux`` it will create unique label identifiers in
-``typo3conf/ext/quickstart/Resources/Private/Language/locallang.xml`` and use those as default translations at the same time.
-Once you are finished developing your templates you can go ahead and exchange the default translations with the real ones.
-No worries, existing translations won't be touched.
+Если включить возможность перезаписи LLL (LLL rewrite) во ``flux``, то уникальные идентификаторы меток (label) автоматически
+будут создаваться в ``typo3conf/ext/quickstart/Resources/Private/Language/locallang.xml``,
+и в то же время они будут использоваться в качестве переводов по умолчанию.
+По окончанию разработки своих шаблонов, можно пойти дальше, и заменить переводы по умолчанию на настоящие.
+Не беспокойтесь, уже сделанные переводы не будут затронуты.
 
-### Excursion about assets
+### Поговорим о ресурсах (assets)
 
-Inclusion of a page template's global CSS and JS is configured via typoscript in ``setup.txt`` that has been added earlier.
-As in any other extbase extension asset files are located in ``typo3conf/ext/quickstart/Resources/Public`` and can of course
-be organized in subfolders to your liking. Let's add ``style.css`` and ``script.js`` to our template by adding the following
-lines:
+Подключение к шаблону страницы глобальных CSS и JS настраиваются посредством typoscript в ``setup.txt``,
+который уже был добавлен ранее. Как и во всех других расширениях на основе extbase, файлы ресурсов (asset) расположены в
+``typo3conf/ext/quickstart/Resources/Public``, и могут быть упорядочены по подпапкам. Давайте добавим к нашему шаблону
+``style.css`` и ``script.js``, добавив лишь несколько строк в указанный выше файл:
 
 ```
 [...]
@@ -289,16 +292,17 @@ plugin.tx_vhs.settings.asset {
 }
 ```
 
-As you can see ``plugin.tx_vhs.settings.asset`` is an array of asset files to be included into your page. _It provides a
-lot more configuration options we don't need here yet but will be discussed at a later stage_. For now we'll stick to the
-most important being ``name`` and ``path`` which should be self-explanatory. The array index doesn't follow any special
-convention but it's common practice to use the name. Now, make sure those files exist, clear your caches and have a look
-at the HTML source of your page to find the assets being included (JS at the bottom of the page).
+Как видно, ``plugin.tx_vhs.settings.asset`` - это массив файлов ресурсов, подключаемых к странице сайта. _Существует множество
+параметров для их настройки, но нам они пока не нужны. О них поговорим позже_. Пока же нам нужны лишь наиболее важные параметры:
+``name`` - название, и ``path`` - путь. Массив индексов не определяется никакими правилами,
+но общеупотребимо использование для них name. Теперь, убедитесь, что эти файлы существуют,
+очищенны кеши и взгляните на HTML код вашей страницы (с текущим шаблоном) - к ней должны быть подключены ресурсы - assets
+(JS внизу станицы).
 
-## Шаг 4: Custom content elements
+## Шаг 4: Свои элементы содержимого
 
-Content elements are defined similar to page templates and consist of a layout and a template file. Typically the layout
-simply renders the main section of the template and is shared with several content elements:
+Элементы содержимого определяются подобно шаблонам страниц, и также состоят из файлов макета (layout) и шаблона (template).
+Обычно макет (layout) просто выводит раздел (section) Main шаблона (template), которая общая для нескольких элементов содержимого:
 
 ```html
 <f:layout name="Content"/>
@@ -306,7 +310,7 @@ simply renders the main section of the template and is shared with several conte
 <f:render section="Main"/>
 ```
 
-All magic happens in the content element's template file which in its basic structure looks like this:
+Все волшебство происходит в файле шаблона (template) элемента содержимого, основная структура которого похожа на следующую:
 
 ```html
 {namespace flux=Tx_Flux_ViewHelpers}
@@ -328,12 +332,13 @@ All magic happens in the content element's template file which in its basic stru
 </div>
 ```
 
-As you can see we connect the template to the above layout via ``<f:layout name="Content"/>``, add a section named
-``Configuration`` that will contain our flexform, a Section named ``Preview`` that will get rendered in the backend and
-the ``Main`` section as found in the layout that will contain the rendered frontend content.
+Как уже говорилось, шаблон (template) с приведенным выше макетом (layout) соединяется через ``<f:layout name="Content"/>``,
+добавим разделы (section) ``Configuration``, в котором будут наши формы настроек (flexform), ``Preview``,
+отвечающий за вид во внутреннем интерфейсе и раздел ``Main`` где, как видно из макета (layout) будет выводиться содержимое на
+страницы сайта.
 
-Now, let's create a content element for a typical use case: a teaserbox consisting of an image, a headline, some teaser
-text and an optional link in ``typo3conf/ext/quickstart/Resources/Private/Templates/Content/Teaser.html``:
+Теперь сделаем типовой элемент содержимого: анонс, состящий из изображения, заголовка, некоторого текста и необязательной ссылки
+``typo3conf/ext/quickstart/Resources/Private/Templates/Content/Teaser.html``:
 
 ```html
 {namespace flux=Tx_Flux_ViewHelpers}
@@ -392,29 +397,30 @@ text and an optional link in ``typo3conf/ext/quickstart/Resources/Private/Templa
 </div>
 ```
 
-## Let's have a look at the three sections:
+## Взглянем на три раздела (section):
 
-``Configuration`` contains the flexform that defines the content element's fields which are wrapped in an outer
-``<flux:flexform/>`` viewhelper. ``id`` is a required argument for this viewhelper and used to generate the translation key
-for the element's label (flux.teaser in this case) in TYPO3's _New Content Element Wizard_. By default a new tab labelled
-_FCE_ is created which can be overridden with the viewhelper argument ``wizardTab``.
+``Configuration`` содержит форму настроек (flexform), определяющую поля элементов содержимого внутри проектора (viewhelper)
+``<flux:flexform/>`` . ``id`` - обязательный элемент для этого проектора (viewhelper) и используется для формирования ключа
+перевода для меток элемента (в этом случае flux.teaser) в _Мастере нового элемента содержимого (New Content Element
+Wizard)_ TYPO3. По умолчанию создается новая вкладка с меткой _FCE_ - она может быть переназначена при помощи аргумента
+``wizardTab``.
 
-There's nothing special about the flexform's fields in this example so to avoid duplicate content please take a look at the
-reference guide on [fedext.net](http://fedext.net/viewhelpers/flux.html) where you can find all required information about
-their functionality and arguments. One thing to take a closer look at though is the link wizard that is implemented by making
-it a child of the according input field.
+Ничего дополнительного о полях формы в этом примере сказать нельзя, ознакомьтесь со справочным руководством на
+[fedext.net](http://fedext.net/viewhelpers/flux.html), где имеется вся необходимая информация о функциях и аргументах проекторов.
+Внимательнее следует взглянуть на мастер ссылок (link wizard), добавляемого в качестве дочернего элемента к соответствующему
+полю ввода (input).
 
-> The fields' values are accessible as equally named variables in sections ``Preview`` and ``Main``.
+> В разделах (section) ``Preview`` и ``Main`` доступ к значениям полей осуществляется посредством переменных с эквивалентными
+названиями.
 
-``Preview`` contains some real oldschool table layout to be rendered in the backend and which may look familiar if you worked
-with Templavoilà before. Note the usage of ``<v:media.image />`` to avoid issues with displaying images in the backend due
-to relative paths.
+``Preview`` - это некий старомодный табличный макет для вывода во внутреннем интерфейсе, который может быть знаком по работе с
+Templavoilà. Обратите внимание на использование ``<v:media.image />`` во избежание проблем с отображением изображений во
+внутреннем интерфейсе, ввиду использования относительных путей.
 
-``Main`` finally contains the output to be rendered in the frontend and makes use of some fluid viewhelpers you certainly
-know already.
+``Main`` содержит все, выводимое на страницы сайта посредством использования проекторов (viewhelpers) fluid.
 
-After clearing all caches you should now see a new tab _FCE_ in the _New Content Element Wizard_ that makes our new content
-element selectable. As described earlier Flux' LLL rewrite feature will - when enabled - take care of generating translation
-keys in ``typo3conf/ext/quickstart/Resources/Private/Language/locallang.xml``.
+После очистки всех кешей, в _Мастере нового элемента содержимого (New Content Element Wizard)_ должна появиться новая вкладка
+_FCE_, где возможно выбрать новые элементы содержимого. Как уже говорилось, функция LLL rewrite из Flux, при включении,
+позаботиться о формировании переводимых метов в ``typo3conf/ext/quickstart/Resources/Private/Language/locallang.xml``.
 
-To be continued...
+Продолжение следует...
