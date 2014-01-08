@@ -1,19 +1,19 @@
-## TYPO3 на базе Fluid: Form Component Guide
+## TYPO3 на базе Fluid: путеводитель по компонентам форм
 
-### Foreword
+### Напутствие
 
-This guide uses concepts and object names which will only be known to you if you have a bit of background Flux knowledge. If you
-are looking for a guide describing these concepts, a very good place to start is the [Introduction Chapter](../Introduction.md).
-You can of course read this guide without having background knowledge - we have attempted to keep it general and descriptive of
-Flux's features - but you will find these explanations much more familiar if you have used Flux at some point in the past. If you
-need to dive more into the concept of Flux Forms, [a full Flux Form concept description](../Concepts/FluxForms.md) is available.
+В этом путеводителе используются концепции и названия объектов, понятные лишь тому, кто уже немного знаком со Flux. Если Вам
+нужно руководство, объясняющее все эти концепции, лучше начать с [Вводной главы](../Introduction.md). Конечно,
+можно читать это и без знания основных понятий - оно написано по большей части общим описательным языком относительно
+возможностей Flux, но все это станет гораздо более полезным, если Вы уже были в прошлом слегка знакомы с Flux. Если же нужно
+более глубокое знание концепции форм Flux Forms, доступно [полное описание концепции форм Flux](../Concepts/FluxForms.md).
 
-Each aspect of the Form Component is explained in broad strokes then rounded off with links to the full API reference (if one
-applies) and more importantly the cookbook section dedicated to recipes for various use cases. The way to read this guide is to
-read this document first, then continue to recipes which interest you and learn more about how to use the features.
+Каждая сторона компонентов форм сначала описывается в общих чертах, а затем разъясняется со ссылками на полный справочник API
+(если это применимо), и, что важнее, раздел советов дает рецепты в разных областях. Лучше всего сначала ознакомиться с этим
+руководством, затем перейти к интересным для Вас примерам и углубитья в сведения о функциях.
 
-> Note: this guide does not teach you how to use specific implementations of Flux, for example `fluidcontent` and `fluidpages`.
-> There are dedicated guides for each of these implementations: this one is for understanding Flux itself - and most importantly
-> how and where you can use it to implement TYPO3 forms (TCA, FlexForms) for your own extensions in easier ways.
+> Замечание: этот путеводитель не разъяснит специфичные применения Flux, например, во `fluidcontent` и `fluidpages`.
+> Каждой из этих граней посвящено соответствующее руководство, а здесь разъясняется сам Flux, и,
+самое главное, как и где можно использовать применительно к формам TYPO3 (TCA, FlexForms) в своих расширениях наилучшим образом.
 
 TODO: add guide-type guide

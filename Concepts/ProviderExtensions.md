@@ -1,61 +1,67 @@
-TYPO3 на базе Fluid: Concepts - Provider Extensions
-===================================================
+TYPO3 на базе Fluid: концепции - расширения поставщики (Provider Extensions)
+============================================================================
 
-## Foreword
+## Введение
 
-This concept description deals only with the current best practice. The legacy approach - placing template files in `fileadmin` as
-was done in TemplaVoila for example - is considered deprecated and is not documented here. The new approach - placing templates in
-an extension - is what this chapter is all about.
+Эта концепция описывает лишь передовой опыт. Наследие прошлого - размещение файлов шаблонов в `fileadmin`, как это делалось,
+например, в TemplaVoila, признано устаревшим, и здесь не рассмартивается. Новый подход - размещение шаблонов в расширениях,
+вот о чем эта глава.
 
-### Disambiguation
+### Устранение неоднозначности
 
-The concept of [Provider Extensions](ProviderExtensions.md) (this document) should not be confused with the concept of
-[Providers](Providers.md). The Provider extensions concept is about file structure, the Provider concept is about a type of class.
+Концепцию [расширений поставщиков (Provider Extensions)](ProviderExtensions.md) (этот документ) нельзя путать с концепцией
+[Провайдеров](Providers.md). Концепция раширений поставщиков говорит о структуре файлов, а концепция Провайдеров - о типе класса.
 
-### API level 1
+### Слой API 1
 
-This concept is one of the easiest to learn and use in everyday work. It requires almost no knowledge of TYPO3 and involves almost
-no PHP code. It deals with template files and basic configuration files.
+Эта концепция - одна из простейших для изучения, и используется в повседневной работе. Она почти не требует знаний о TYPO3,
+и почти не имеет дело с кодом PHP. Она связана с файлами шаблонов и основными файлами настроек.
 
-## What is a Provider Extension?
+## Что такое расширения поставщики - Provider Extension?
 
-A Provider Extension is simply an extension which provides (as in: contains, configures and announces) templates and code which
-Flux can then read. The information Flux reads can then be used by other features such as `fluidpages` and `fluidcontent`. The
-idea behind a Provider Extension is to have a structure for templates that is based on well-known conventions.
+Расширения поставщики - такие же расширения, но поставляющие (то есть, содержащие, настраивающие и сообщающие) шаблоны и код,
+который затем может быть прочитан Flux. Информация, усвоенная Flux, затем может быть использована в других функциях, вроде
+`fluidpages` и `fluidcontent`. Идея, стоящая за раширениями поставщиками, - построение структуры для шаблонов на основе давно
+известных правил.
 
-## Why an extension - why not just store files somewhere?
+## Почему расширение, а не просто хранение файлов где-либо?
 
-While we realise that this is an opinionated way, and in addition a way which was not used in the old TemplaVoila days, we hope
-the following points will convince you exactly why this is a much better approach than files in fx `fileadmin`:
+Хотя мы и понимает, что это не простой путь, и, кроме того, путь, не использовавшийся в последнее время в TemplaVoila,
+мы надеемся, что следующие моменты объяснят, почему этот подход лучше, чем файлы, например, в `fileadmin`:
 
-1. An extension is very easy to reuse. Download it from one site and upload to another - and when the template contains both
-   templates _and_ the configuration required to use them, your template collections can be used in a lot more places than just
-   the site they were made for (case in point: `fluidcontent_bootstrap` is a Provider Extension specifically designed to be used
-   on site after site, when the site is based on Twitter's Bootstrap CSS framework - it contains content specific to Bootstrap).
-2. An extension in the eyes of TYPO3 is a **logical context** - extensions are identified by a unique key. This clearly separates
-   one template collection from other collections. This is different from a convention of fx having templates in `fileadmin/html`
-   but it does mean that you can run multiple collections alongside each other without risk of colissions. And, as mentioned
-   already, this also means your templates become portable.
-3. Packaging into extensions gives Flux a way to build a proper `ControllerContext` to use when accessing your templates - and
-   this, among other things, means you can use short LLL label names and Fluid will automatically use the correct LLL file. The
-   same applies to resource locations - for example images, styles and scripts used in your templates. Having a proper context
-   means Fluid and Extbase both "just know" where to look for files. Knowing the extension key means knowing which paths to use.
+1. Расширени отлично подходят для повторного использования. Скачайте их с одного сайта и загрузите на другой,
+   и если шаблоны содержат _и_ настройки для их использования, то коллекция шаблонов может быть использована в гораздо большем
+   количестве мест, а не на лишь одном единственном сайте (пример этого: `fluidcontent_bootstrap` - расширение поставщик,
+   специально разработанное для использования на множестве сайтов, использующих механизм Twitter Bootstrap CSS - здесь есть все
+    необходимое для Bootstrap).
+2. Расширение, с точки зрения TYPO3 - **логический контекст**, который определяется уникальным ключом. И это четко отделяет
+   одну коллекцию шаблонов от другой. Это отличается от правила, например, расположения шаблонов в `fileadmin/html`,
+   это означает, что можно иметь несколько коллекций одновременно без риска коллизий. И, как уже было сказано, это значит,
+   что шаблоны стали переносимыми.
+3. Упаковка в расширение дает Flux способ построения надлежащего `контекста контроллера - ControllerContext` для его
+   использования при доступе к шаблонам. И это, наряду с прочим, означает, что можно использовать короткие наименования LLL
+   меток, а Fluid автоматически будет использовать правильный файл LLL. То же справедливо к местоположению ресурсов, например,
+   изображений, стилей и сценариев, использующихся в шаблонах. Надлежащий контекст позволяет как Fluid, так и Extbase "знать",
+   где искать нужные файлы. Знание ключа расширения означает знание используемых для файлов путей.
 
-Although there are of course many more points (version control efficiency, TS configuration conventions, view paths overrides etc)
-these three should be enough to convince you that starting to use extensions instead of files in `fileadmin` will, very quickly
-even, save you a lot of time especially when using resources (including LLL).
+Хотя есть, разумеется, и другие выгоды (эффективный контроль версий, правила для настроек TS,
+переназначаемые пути к режимам - view), эти три довода должны быть достаточными для перехода к использованию расширений,
+вместо помещения файлов в `fileadmin`, все это значительно ускорит работу и сохранит много времени,
+особенно при работе с ресурсами (включая LLL).
 
-But if that's not enough: other features TYPO3 на базе Fluid provides assume you already use an extension - and we have designed
-it all to fit together so that your Provider Extension may contain content and page templates, custom plugins, backend modules
-etc. as one combined package - obviously ideal as a way to ship entire site designs along with all configuration and with all
-dependencies set as extension dependencies that the TYPO3 extension manager will install.
+Но если и этого недостаточно, другие возможности TYPO3 на базе Fluid подразумевают использование расширений - мы и
+разрабатывали все это в тесной связи друг с другом, так чтобы расширение поставщик могло бы содержать шаблоны содержимого и
+страниц, дополнения, модули внутреннего интерфейса и все остальное в одном пакете, что идеально для распространения всего
+дизайна сайта наряду со всеми настройками и зависимостями, обозначенными как зависимости от других расширений,
+которые установит модуль управления расширениями TYPO3.
 
-This explains why our best practice - and indeed the only way we bother documenting in detail - is the Provider Extension. It is
-the only approach that fits perfectly and it provides so many benefits that it would require severe TYPO3 hacks to get otherwise.
+Это объясняет, почему наше лучшее достижение, несмотря на то, что из-за этого приходится писать подробную документацию,
+- расширения поставщики (Provider Extension). Только такой подход имеет огромное количество преимуществ и не требует хаков для
+интеграции в TYPO3.
 
-## The file layout
+## Файловая структура
 
-Files in a Provider Extension are by convention always in this format:
+Файлы в расширениях поставщиках всегда должны следовать следующим правилам в форматах:
 
 ```
 typo3conf/ext/myproviderextension
@@ -82,49 +88,53 @@ __ ext_tables.php
 __ ext_localconf.php
 ```
 
-It should be pretty clear just from this that we _use Extbase's conventions to place configuration and template folders and files_
-and that _your provider extension is simply a standard TYPO3 extension with some predefined file structure_. The way you use each
-folder normally depends on which type of Provider Extension you are creating - and the feature-specific guides always start by
-explaining which folders and files are involved.
+И должно быть понятно уже из тоо, что мы _используем правила Extbase о местоположении настроек и папок для шаблонов и файлов_,
+и того, что _расширение поставщик - это обычное расширение TYPO3 с определенной файловой структурой_. А использование каждой
+папки обычно зависит от типа создаваемого расширения поставщика, ну а руководство по созданию определенного функционала всегда
+начинается с объяснения структуры папок и файлов.
 
-Your `ext_localconf.php` and `ext_tables.php` files will contain the various calls to Flux to register which types of Flux
-templates your Provider Extension uses - along with any other configuration you might need; custom TCA fields for `tt_content` fx.
-The `Resources/Private` folder contains a template structure and the language file - and the templates are divided into subfolders
-by name of the controller which will render them (e.g. in `fluidpages` the controller is named `PageController` which means the
-folder name is `Page`, in `fluidcontent` the controller name is `Content` and so on). Layouts and Partials are supported just like
-normal. And finally, the `Configuration` directory contains the TypoScript that your extension makes available for integrators to
-select and use in TYPO3 when your Provider Extension is installed.
+Файлы `ext_localconf.php` и `ext_tables.php` должны содержать различные запросы к Flux для регистрации иноформации о том,
+какие шаблоны Flux используются в расширении поставщике, наряду с другими необходимыми настройками,
+например, полями TCA для `tt_content`. Папка `Resources/Private` содержит структуру шаблона и языковые файлы,
+сам шаблон разделен на вложенные папки, по названию которых контроллер и будет определенным образом выводить их (например,
+во `fluidpages` контроллер называется `PageController` - а это значит, что папка должна называться `Page`,
+во `fluidcontent` контроллер называется `ContentController`, а папка -`Content`, и так далее). Как обычно поддерживаются макеты
+(Layouts) и шаблонные фрагменты (Partials). И наконец, папка `Configuration` содержит TypoScript,
+посредством которого расширение делает возможным для интеграторов выбор и использование своих ресурсов в TYPO3,
+при его установке.
 
-## What must the template files contain?
+## Что должно находиться в файлах шаблонов?
 
-The actual contents of template files depends on which feature they should be used with - but there are a few shared rules which
-you can read all about in the [Templates concept](Templates.md) chapter of this documentation. Following the standard rules always
-results in a working, selectable (yet very minimal) template - what the template should contain in addition to the standard format
-is up to each specific feature and is documented by each feature.
+Фактическое содержимое файлов шаблона зависит от их предназначения, но есть и несколько общих правил,
+о которых можно прочитать в главе о [концепции шаблонов](Templates.md) этой документации. Следование стандартам гарантирует
+работу и возможность выбора (пока еще из немногих) шаблонов, а что еще должно быть в файлах зависит от каждой конкретной
+реализуемой функции.
 
-The only files which are required to contain the standard format, are the files located under `Templates` - in other words: your
-Layouts and Partials can contain any content you want, but Templates must contain Flux-specific information.
+Обязательными стандартными файлами являются расположенные в папке `Templates`, другими словами: макеты (Layouts) и шаблонные
+фрагменты (Partials) могут содержать все, что угодно, но шаблоны (Templates) должны следовать спецификации Flux.
 
-Study the [Templates concept](Templates.md) for more details about the content of these template files.
+Детально об этих файлах рассказывается в [концепции шаблонов(Templates.md).
 
-## Installing and using Provider Extensions
+## Установка и использование расширений поставщиков
 
-Just like a normal TYPO3 extension, you install Provider Extensions through the extension manager - and you then include the
-static TypoScript, if static TypoScript is provided by the extension. Some Provider Extensions may require you to configure the
-extension (click the gear icon in extension manager next to that extension) and others may require you to configure TypoScript
-constants or setup. However, configuration is by convention always provided in one or both of these ways.
+Расширение поставщик устанавливается также, как и всякое другое в TYPO3 - через модуль управления расширениями,
+а затем необходимо подключить его статический шаблон TypoScript. Некоторым расширениям поставщикам необходима установка
+параметров TypoScript в константах (constants) и/или настройке (setup). Но в любом случае,
+настройка по правилам проводится указанными способами.
 
-Using the Provider Extension depends on the feature it provides templates for - `fluidpages` for example lets you select the
-templates from Provider Extensions when you edit page properties, `fluidcontent` lets you add content elements which render each
-of the `Content` templates you provide. Other features let you select, configure and render templates in different ways - each
-feature documents how exactly they will use the templates from your Provider Extension and what the templates should contain.
+Использование расширения поставщика зависит от функционала, который оно представляет, например,
+`fluidpages` позволяет выбирать шаблон из расширения поставщика во время редактирования свойств страницы,
+`fluidcontent` - добавлять элементы содержимого, формирующие предоставленные шаблоны `Content`. Другие функции позволяют
+выбирать, настраивать и выводить шаблоны самым разным образом - кажая функция описана в документации: как именно они используют
+ шаблоны из расширения поставщика и что конкретно должно присутствовать при этом в шаблонах (templates.
 
-## Custom controllers in Provider Extensions
+## Пользовательские контроллеры в расширениях поставщиках
 
-Some features of TYPO3 на базе Fluid - such as `fluidcontent` and `fluidpages` - support custom controller classes which Flux will
-use instead of the controllers that ship with each of those features. Naturally this allows much more flexibility (as an example,
-a custom `PageController` can accept custom arguments in the action that corresponds to the template that gets rendered). If and
-when you add custom controller classes the location and naming of these also must follow Extbase conventions:
+Некоторые функции TYPO3 на базе Fluid, вроде `fluidcontent` и `fluidpages`, поддерживают пользовательские классы контроллеров,
+которые Flux будет использовать вместо встроенные в эти функции контроллеров. Фактически это дает очень большую гибкость
+(например, пользовательский `PageController` может воспринимать указанные аргументы в действии (action),
+соответствующем выводимому шаблону). Если добавляются свои классы контроллеров, то их именования и расположения должны
+следовать правилам Extbase:
 
 ```
 typo3conf/ext/myproviderextension
@@ -135,18 +145,18 @@ ______ ContentController.php
 
 ```
 
-The [Flux Controller concept](FluxControllers.md) applies here and the linked document contains in-depth information about these
-custom controller classes and what they can do. However, that concept belongs in **layer 2** which is obviously more complex to
-learn and use, than the basic templates-and-ViewHelpers-and-TypoScript approach.
+Здесь применяется [концепция контроллера Flux](FluxControllers.md), документ по ссылке содержит доступную информацию о таких
+пользовательских классах контроллеров и о их возможных действиях. Но эта концепция уже относится к **слою 2**,
+который более сложен для восприятия и использования, чем простой подход шаблоны-проекторы-TypoScript.
 
-## Adding custom plugins in Provider Extensions
+## Добавление пользовательского дополнения в расширение поставщик
 
-We explicitly state this since it is not immediately obvious: you can of course also place Extbase plugins alongside the templates
-and configuration your Provider Extension contains - and the plugins and templates can even use the same TypoScript setup since
-they share the same extension scope, as already explained.
+Явно говорим об этом, так как это не очевидно: наряду с шаблонами и настройками, расширение поставщик может содержать и
+дополнения Extbase, и дополнения, и шаблоны могут даже использовать одни и те же настройки (setup) TypoScript,
+так как они разделяют одну и ту же область расширения, как уже разъяснялось выше.
 
-The only thing you must be careful of, is not to use the reserved `Content`, `Page`, `CoreContent` or `Backend` controller names
-if (and only if) you intend to use either of those features - from `fluidcontent`, `fluidpages`, `fluidcontent_core`, and
-`fluidbackend` respectively. If you don't use a particular feature you can of course grab the reserved controller name for your
-controller - but it is recommended to avoid these names if you are not sure if you may be using other TYPO3 на базе Fluid features
-later on in your Provider Extension.
+Едиственное, с чем нужно обращаться осторожно - не использовать зарезервированных названий контроллеров: `Content`, `Page`,
+`CoreContent` или `Backend`, при (и только при этом) вы собираетесь воспользоваться любой из этих функций из `fluidcontent`,
+`fluidpages`, `fluidcontent_core`, и `fluidbackend`, соответственно. Если какая-либо функция не используется,
+конечно можно воспользоваться зарезервированным название контроллера в своих целях, но рекомендуем воздержаться от подобного,
+так как нельзя быть уверенным, что в дальнейшем они не понадобяться в одном их ваших расширениях поставщиках.

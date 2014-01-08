@@ -1,7 +1,7 @@
-TYPO3 на базе Fluid: Concepts - Controllers
+TYPO3 на базе Fluid: концепции -Controllers
 ===========================================
 
-### API level 2
+### Слой API 2
 
 This concept is slightly more advanced than **layer 1** concepts; understanding it involves a basic PHP background knowledge and
 some basic knowledge about Extbase extensions, making PHP classes and using a PHP class API in general (extending classes, calling

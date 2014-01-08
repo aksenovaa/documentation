@@ -1,43 +1,44 @@
-## Using locallang.xlf in your Flux/VHS Provider Extension
+## Использование locallang.xlf в своих Flux/VHS расширениях поставщиках
 
-### Foreword
+### Напутствие
 
-To prepare your Provider-Extension to use it with different languages, you need to move all visible labels and descriptions from
-your Template, Partials and Layout files into a locallang-file. So TYPO3 can take care of which locallang should be loaded, both
-for back- and frontend.
+Чтобы подготовить свое расширение-проводник к использованию на различных языках, необходимо переместить все выводимые метки и
+описания из файлов Template, Partials и Layout в файл locallang. После чего о загрузке локализуемых меток,
+как для внутреннего интерфейса, так и страниц сайта позаботиться TYPO3.
 
-If you dont use labels or descriptions in your Page- or Content templates, Flux will look into the ``Resources/Private/Language``
-folder of your extension and will recognize if there is a label/description (or translation) available for the label key. If
-present, Flux will add this label/description in the backend-view for these elements. So there is basically no need for these
-attributes in your template-files.
+Если в шаблонах страниц и содержимого не используются метки и описания, Flux просмотрит папку ``Resources/Private/Language``
+и определит по ключам меток доступные метки/описания (или переводы). И если таковые присутствуют,
+Flux добавит и выведет их во внутреннем интерфейсе для этих элементов. Поэтому нет необходимости заносить эти атрибуты в файлы
+шаблонов.
 
-### A note about default languages
+### Замечание о языках по умолчанию (default)
 
-**You should work in English first, you can always change the default language later using TYPO3's language configuration.** Doing
-this makes it much easier to share your examples, get support, avoid confusion with label names and of course it makes your work
-suitable for use with translation software like Pootle (see fx http://translation.typo3.org). Remember: English is the official
-language of TYPO3.
+**Начинать всегда следует с английского, а изменить язык никогда не поздно, настроив нужный в TYPO3.** Поступая таким образом,
+становиться гораздо проще делиться своими примерами, получать помощь, избежать путаницы с названиями меток и, конечно,
+сделать расширение подходящим для работы с программами перевода, вроде Pootle (смотрите http://translation.typo3.org). Помните,
+официальный язык для TYPO3 - английский.
 
-### Working with locallang.xlf
+### Работа с locallang.xlf
 
-Gernerally you should take a look at this article:
+Сначала взгляните на эту статью:
 
 > http://docs.typo3.org/TYPO3/CoreApiReference/Internationalization/Introduction/Index.html
 
-If you want to work with ``locallang.xlf`` you need to create it in the following folder:
+Если нужно работать с ``locallang.xlf``, необходимо создать его в следующей папке:
 ``typo3conf/ext/**YOUREXT**/Resources/Private/Language/``
 
-The file ``locallang.xlf`` is used for the default language of your web site and should be in English.
+Файл ``locallang.xlf`` используется для языка по умолчанию, и его содержимое должно быть на английском.
 
-For other languages simply create a new file with the ISO code in front of the filename like this:
+Для других языков просто создайте новые файлы с приставкой в виде их ISO кода, вроде:
 
-- For German use ``de.locallang.xlf``
-- For French use ``fr.locallang.xlf``
+- для русского ``ru.locallang.xlf``
+- для немецкого ``de.locallang.xlf``
+- для французского ``fr.locallang.xlf``
 - ...
 
-For a list of ISO language codes you can visit http://www.loc.gov/standards/iso639-2/php/code_list.php
+Список ISO кодов для языков можно посмотреть на странице http://www.loc.gov/standards/iso639-2/php/code_list.php
 
-All Languagefiles should at least contain the following:
+Во всех языковых файлах должна быть хотя бы минимальная структура:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
@@ -50,11 +51,11 @@ All Languagefiles should at least contain the following:
 </xliff>
 ```
 
-## Translate labels and description in the backend ##
+## Перевод меток и описаний внутреннего интерфейса ##
 
-In this example, we will translate the following Flux form element:
-(Please notice, that this is a Configuration section for a Page template. Content- and Plugin templates require an additional
-``flux:form.content`` tag in ``flux:grid.column``)
+В этом примере мы переведем следующий элемент формы Flux:
+(Но помните, что это - раздел (section) Configuration в шаблоне (template) страницы. Шаблонам содержимого (content) и модуля
+(plugin) требуется дополнительный тег ``flux:form.content`` внутри ``flux:grid.column``)
 
 ```
 <f:section name="Configuration">
@@ -71,22 +72,22 @@ In this example, we will translate the following Flux form element:
 </f:section>
 ```
 
-So we need to add labels and/or description for
+Так, нам нужно добавить метки и/или описания для
 
-- the form itself
-- the sheet called "basic"
-- the checkbox called "includenavi"
-- the grid.colum called "content"
+- самой формы (form);
+- вкладки (sheet) с названием "basic";
+- флажка (checkbox) с названием "includenavi";
+- столбца сетки (grid.column) с названием "content".
 
-To achieve that, we place this code in the ``locallang.xlf`` in the ``body`` tag for each element:
+Для этого поместим следующий код в ``locallang.xlf`` внутри тега ``body`` каждого элемента:
 ```xml
 <trans-unit id="ID.and.path.of.the.element">
       <source>Label or description to be shown</source>
 </trans-unit>
 ```
-So basically it always is ``flux.formID.type.name-of-the-element``
+И основой всегда будет ``flux.formID.type.name-of-the-element``
 
-In our example, we add the following to the default xlf-file (``locallang.xlf``):
+В нашем примере, в файл xlf (``locallang.xlf``) добавим следующее:
 
 ```xml
 <trans-unit id="flux.defaultpage">
@@ -103,8 +104,8 @@ In our example, we add the following to the default xlf-file (``locallang.xlf``)
 </trans-unit>
 ```
 
-As you can find in ``typo3conf/ext/flux/Classes/Form/AbstractFormComponent.php`` --> ``public function getLabel()`` these types
-are available:
+Как понятно из ``typo3conf/ext/flux/Classes/Form/AbstractFormComponent.php`` --> ``public function getLabel()``,
+доступны следующие типы:
 
 - sheets (flux.sheets.id)
 - sections
@@ -115,7 +116,7 @@ are available:
 - containers
 - fields
 
-### The whole file is now looking like this: ###
+### Файл стал таким: ###
 
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
@@ -141,10 +142,11 @@ are available:
 </xliff>
 ```
 
-## Working with other (additional) languages ##
+## Работа с другими (дополнительными) языками ##
 
-To add translations for further languages we need to create the ``locallang.xlf`` for each languages and name it this way:
-``iso.locallang.xlf`` (for example ``de.locallang.xlf``). This file also contains this structure:
+Для добавления переводов для других языков, необходимо создать файлы ``locallang.xlf`` для каждого из них,
+именуя их следующим образом:
+``iso.locallang.xlf`` (например, ``ru.locallang.xlf``). И файл будет иметь такую структуру:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
@@ -158,69 +160,70 @@ To add translations for further languages we need to create the ``locallang.xlf`
 </xliff>
 ```
 
-To tell TYPO3 which language this is for, it is not enough to name the file. We need to extend the ``<file>`` tag within the
-``iso.locallang.xlf`` with the target language like this:
+Чтобы сообщить TYPO3 язык этого файла, недостаточно одного его названия, также необходимо добавить в тег ``<file>`` атрибут
+``target-language`` ISO код языка:
 
 ```xml
 <file source-language="en" datatype="plaintext" original="messages"
-date="2012-10-17T17:55:17Z" product-name="ext-name" target-language="de">
+date="2012-10-17T17:55:17Z" product-name="ext-name" target-language="ru">
 ```
 
-As you can see we added the language target "de" by adding **target-language="de"**
+Как видно, мы добавили целевой язык "ru", изменив **target-language="ru"**
 
-The next thing to do is to add the translation like we did in the default language-file - with one difference: instead of the
+Далее, нужно добавить перевод, как уже делалось для файла на языке по умолчанию, но с одной разницей - вместо
 ```xml
 <source>my translation</source>
 ```
 
-we use
+нужно использовать
 
 ```xml
 <target>my translation</target>
 ```
 
-The German file looks like this now (``de.locallang.xlf``):
+Теперь русский файл выглядит так (``ru.locallang.xlf``):
 
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
 	<file source-language="en" datatype="plaintext" original="messages"
-	      date="2012-10-17T17:55:17Z" product-name="**YOUREXT**" target-language="de">
+	      date="2012-10-17T17:55:17Z" product-name="**YOUREXT**" target-language="ru">
 		<header/>
 		<body>
 			<trans-unit id="flux.defaultpage">
-				<target>Standard-Seitenlayout</target>
+				<target>Шаблон страницы по умолчанию</target>
 			</trans-unit>
 			<trans-unit id="flux.defaultpage.sheets.basics">
-				<target>Basis Konfiguration</target>
+				<target>Основная настройка</target>
 			</trans-unit>
 			<trans-unit id="flux.defaultpage.fields.includenavi">
-				<target>Navigation einbinden</target>
+				<target>Включение навигации</target>
 			</trans-unit>
 			<trans-unit id="flux.defaultpage.columns.content">
-				<target>Inhaltsbereich</target>
+				<target>Содержимое</target>
 			</trans-unit>
 		</body>
 	</file>
 </xliff>
 ```
 
-## Using the language-file for the frontend ##
+## Использование языкового файла для внешнего интерфейса (страниц сайта) ##
 
-If you want to use labels or descriptions in the frontend output, you should also place them in the ``locallang.xlf`` of the
-target language. To display the label ``contactperson`` you can add this to your Template, Layout or Partial file:
+Если нужно использовать метки или описания при выводе на страницы сайта, то их также необходимо поместить в файл
+``locallang.xlf`` целевого языка. Для вывода метки ``contactperson``, можно добавить следующий фрагмент в файл
+Template, Layout или Partial:
 
 ```
 <f:translate key="contactperson" extensionName="YOUREXT"/>
 ```
 
-As an alternative you can use this tag inline like this:
+То же самое можно сделать при помощи встроенного синтаксиса:
 
 ```
 {f:translate(key: 'contactperson', extensionName: 'YOUREXT')}
 ```
 
-In the ``locallang.xlf`` place this within the body-tag:
+А в ``locallang.xlf`` разместите следующий код внутри тега body:
 
 ```xml
 <trans-unit id="contactperson">
@@ -228,10 +231,11 @@ In the ``locallang.xlf`` place this within the body-tag:
 </trans-unit>
 ```
 
-Again, to use it in a different language, place this in your ``iso.locallang.xlf`` (in this example in ``de.locallang.xlf``):
+Опять же, для перевода на другой язык, поместите следующий фрагмент в свой файл ``iso.locallang.xlf`` (в нашем примере это
+``ru.locallang.xlf``):
 
 ```xml
 <trans-unit id="contactperson">
-	<target>Ansprechpartner</target>
+	<target>Контактное лицо</target>
 </trans-unit>
 ```

@@ -1,8 +1,8 @@
-## TYPO3 на базе Fluid Cookbook: Wireframe Page Template
+## Рецепты для TYPO3 на базе Fluid: каркас шаблона страниц
 
-> Author: Claus Due, TYPO3 на базе Fluid team. License: [GPLv3](http://www.gnu.org/copyleft/gpl.html.)
+> Автор: Claus Due, команда TYPO3 на базе Fluid. Лицензия: [GPLv3](http://www.gnu.org/copyleft/gpl.html.)
 
-### Purpose: site wireframing without editing template files
+### Назначение: каркас сайта без необходимости редактирования файлов шаблона
 
 **Not intended for production use** - designed for development stage; allows content editors to start building site content in a
 blank TYPO3 site fully prepared to be switched over to use another template when it is ready.
@@ -15,7 +15,7 @@ most recent jQuery using a so-called CDN (outside hosting service, provided by G
 
 When site exits wireframe stage you should disable this template to prevent it from being used on your site!
 
-### The source
+### Исходные файлы
 
 Place as any file in your Provider Extension - for example `Wireframe.html` in `Resources/Private/Templates/Page/`.
 

@@ -1,13 +1,13 @@
-TYPO3 на базе Fluid: Concepts - Flux Forms
+TYPO3 на базе Fluid: концепции -Flux Forms
 ==========================================
 
-## Foreword
+## Введение
 
 This document describes in detail what the `Flux Form` concept means and how it works. The information is in-depth and should not
 be used if you are starting out - if you are new to Flux, start with our [introduction](../Introduction.md), which introduces the
 concepts in a much softer, more readily grasped format.
 
-### API levels 1 and 2
+### Слой APIs 1 and 2
 
 This concept is available for use in Fluid templates, in TypoScript and in PHP. The Fluid and TypoScript aspects can be classified
 as **layer 1** while the PHP based API should be classified as **layer 2** since processing it involves using one or more concepts

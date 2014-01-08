@@ -1,20 +1,20 @@
 ## TYPO3 на базе Fluid: лучшие решения по миграции
 
-In case you started with EXT:fed some time ago, you will need to make some adjustments to port your existing FCE's and
-page layouts to EXT:fluidcontent and EXT:fluidpages.
+Если вы ранее начинали с EXT:fed, сейчас необходимы некоторые приготовления для переноса существующих элементов содержимого и
+макетов страниц во EXT:fluidcontent и EXT:fluidpages.
 
 This chapter should give you an advice on how such migrations would work in general.
 
-### First things first
+### Перво-наперво
 
-FED/Flux in their old representation gave you the possibility to place your templates somewhere in the filesystem
-and reference it via TypoScript. This concept CAN still be used, but the recommended pattern is to use a
-"provider extension" to encapsulate your work on a specific topic.
+FED/Flux в первой своей реинкарнации давали возможность размещения своих шаблонов где-либо в файловой системе и ссылаться на
+них через TypoScript. Эта концепция МОЖЕТ использоваться до сих пор, но лучше воспользоваться "расширением поставщиком" для
+представления своей работы в виде законченной вещи.
 
-The rest of this document assumes, you used a provider extension. Please consult
-[the chapter on code generation](CodeBuilding.md) for further instructions on what options you have for autogeneration.
+В этом документе подразумевается использование именно такого расширения поставщика. Ознакомьтесь с главой
+[лучшие решения по программированию](CodeBuilding.md), чтобы уяснить, как автоматизировать и упростить свою работу.
 
-Your provider extension should at least consist of the following files:
+Расширение поставщик должно включать по крайней мере следующие файлы:
 ```plain
 Configuration
  -> TypoScript
@@ -25,23 +25,24 @@ ext_tables.php
 ext_localconf.php
 ```
 
-For the sake of simplicity, we call the extension ``fluidtypo3_migration``.
+Для простоты и в шутку мы назовем расширение ``fluidtypo3_migration``.
 
-#### TypoScript before the migration
+#### TypoScript перед миграцией
 
-In your old setup, you use something like this to register your elements to FED/Flux:
+В старой настройке (setup), элементы регистрировались в FED/Flux как-то так:
 ```
 plugin.tx_fed.fce.mycollectionname.templateRootPath = ...
 plugin.tx_fed.page.mycollectionname.templateRootPath = ...
 ```
 
-#### TypoScript after migration
+#### TypoScript после миграции
 
-We like to follow standards. In history, ``flux`` had to find its way, but now, we use standard view registration in
-every FluidTYPO3 extension. As you may have thought of, change your TypoScript from above to something like this:
+Нам нужно следовать стандартам. Ранее для ``flux`` пришлось найти свой способ, но на данный момент мы используем стандартную
+регистрацию режимов (view) каждого расширения FluidTYPO3. Как вы уже могли догадаться,
+TypoScript превратиться во что-то подобное:
 
 ```plain
-# View Registrierung
+# View Registration
 plugin.tx_fluidtypo3migration.view {
   label = FluidTYPO3 Migration Elements
   extensionKey = fluidtypo3_migration # notice this entry. Comes in handy when using extension names with underscores
@@ -51,12 +52,11 @@ plugin.tx_fluidtypo3migration.view {
 }
 ```
 
-#### Registering the provider extension
+#### Регистрация расширения поставщика
 
-If you did not generate a provider extension but are in between a migration and still have an own extension you use, you
-have to register it to flux:
-According to the [chapter about configuration](Configuration.md#extension-key-registration) you will have to add code to
-your ``ext_localconf.php`` *and* ``ext_tables.php``.
+Если расширение поставщик не создавалось автоматически, а миграция проводится вручную, необходимо зарегистрировать его во flux:
+Согласно [главе о настройках](Configuration.md#extension-key-registration), необходимо добавить код в
+``ext_localconf.php`` *и* ``ext_tables.php``.
 
 ```php
 // If your extension contains fluidpages page templates/layouts
@@ -67,7 +67,7 @@ Tx_Flux_Core::registerProviderExtensionKey('fluidtypo3_migration', 'Content');
 Tx_Flux_Core::registerProviderExtensionKey('fluidtypo3_migration', 'Backend');
 ```
 
-### Fluid Page Templates
+### Fluid шаблоны страниц
 
 > STUB: how to change oldschool TS setup to new location, recommendation for using an extension as provider,
 > recommendation for using native view TS locations and the ext_tables.php code to register an extension.
@@ -81,7 +81,7 @@ Tx_Flux_Core::registerProviderExtensionKey('fluidtypo3_migration', 'Backend');
 > figure out manual migrations or how to create those EXT update scripts for their own providers if they rename files
 > fx.
 
-### Fluid Content Templates
+### Fluid шаблоны содержимого
 
 > STUB: old location to new pragma - same as for pages.
 
@@ -91,7 +91,7 @@ Tx_Flux_Core::registerProviderExtensionKey('fluidtypo3_migration', 'Backend');
 
 > STUB: connection between DB fields and provider collection and files.
 
-### Flux-enabled plugins in general
+### Общая характеристика дополнений на основе Flux
 
 > STUB: explanation about EXT:builder's CLI commands which can validate a template, ensuring it is fully checked for bad VH class
 > names, missing/changed/now-required arguments and such.
@@ -99,7 +99,7 @@ Tx_Flux_Core::registerProviderExtensionKey('fluidtypo3_migration', 'Backend');
 > STUB: explanation about using EXT:builder to quickly generate a new skeleton extension which can receive template files from
 > an older version extension which can sometimes be easier than renaming everything.
 
-### From FED to ?
+### От FED к ?
 
 > STUB: migrating ViewHelpers used in templates from FED to VHS counterparts - to be extended as we collect information, but
 > should at least contain basic information about ViewHelpers like `fed:data.var` becoming `v:var.set` and `v:var.get` with

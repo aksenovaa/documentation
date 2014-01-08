@@ -1,62 +1,63 @@
-TYPO3 на базе Fluid: Concepts
-=============================
+TYPO3 на базе Fluid: Основные понятия
+=====================================
 
-## Introduction
+## Введение
 
-This section of the documentation explains all concepts used in the extensions provided by the TYPO3 на базе Fluid team.
+Этот раздел документации посвящен всем идеям, используемых командой создателей расширений TYPO3 на базе Fluid team.
 
-You will find details about the following concepts - the further down the list you go, the more advanced the concepts get. When
-you start off using TYPO3 на базе Fluid, you will likely only need to know a few of these concepts. But the more you use the
-extensions, the more likely it is you will at some point want/need to use other concepts.
+Детально описаны концепции из приведенного ниже списка, и чем дальше по нему вы спускаетесь,
+тем сложнее вопрос раскрывается. Поначалу необходимо знать лишь немногие, но чем дальше в лес,
+тем нужнее становится знание и остальных идей.
 
-The information is in-depth; if you are just now starting, then you should start with the [Beginner's Guide](../BeginnersGuide.md)
-and come back to this section if and when you need more detailed information about the concepts covered in that guide.
+Эта информация не для новичков, если вы только начали знакомство, то перейдите к [руководству для начинающих]
+(../BeginnersGuide.md) и вернитесь к этому разделу при необходимости получения детальной информации по концепциям,
+освещаемых в текущем руководстве.
 
-## Table of contents
+## Содержание
 
-* [Provider Extensions](ProviderExtensions.md)
-  Is where you will find information about the preferred, always-recommended template storage: TYPO3 extensions which contain the
-  templates your site should use.
-* [Templates](Templates.md)
-  Is where you find the low-down on how Fluid templates are used by TYPO3 на базе Fluid.
-* [Flux Forms](FluxForms.md)
-  Is all about the forms you can make with Flux - different ways to create them, how they work together with TYPO3, understanding
-  the structure of forms and how the different components fit together.
-* [Flux Controllers](FluxControllers.md)
-  Is a chapter dedicated to explaining how a Flux-enabled Extbase controller differs from a standard Extbase controller and how it
-  opens up the Flux API for more customised uses.
-* [Providers](Providers.md)
-  Deals with the special class pattern called `Providers` - classes which provide data and manipulation for one very specific type
-  of record - fx triggering on and then processing a `tt_content` record which has `CType` set to `myspecialtype` when saved; and
-  much, much more - this concept is, together with the `Flux Forms` concept, the very core that allows Flux to do what it does.
-* [Outlets and Pipes](OutletsAndPipes.md) **Since Flux 7.0.0**.
-  Is dedicated to a special concept which can be used as standalone or in connection with a `Flux Controller` or `Provider`. In
-  all its simplicity it two special types of classes which when put together, routes and processes data through a series of input
-  and output `Pipes` to validate, convert, manipulate, store, send, log, publish (and more!) data from any source to any output.
+* [Provider Extensions - расширения поставщики](ProviderExtensions.md)
+  Здесь можно найти информацию о рекомендуемом хранишище шаблонов: расширениях TYPO3, содержащих шаблоны, применяемые на сайте.
+* [Шаблоны](Templates.md)
+  Здесь можно понять, как шаблоны Fluid используются в TYPO3 на базе Fluid.
+* [Формы Flux](FluxForms.md)
+  Все о формах, которые можно сделать при помощи Flux - разные способы их создания, совместная с TYPO3 их работа,
+  разъяснение структуры форм и о том, как совместить разные их компоненты.
+* [Контроллеры Flux](FluxControllers.md)
+  Разъяснение того, чем контроллер Flux Extbase отличается от стандартного контроллера Extbase,
+  и чем это полезна Flux API для специфичных целей.
+* [Providers - провайдеры](Providers.md)
+  Разъяснения о специальных шаблонных классах под названием `Providers`, поставляющих данные и управляющих одним специфичным
+  типом записей - fx запуск и последующая обработка записей `tt_content` с `CType` вида `myspecialtype` при из сохранении. И
+  многое другое - эта концепция тесно переплетается с концепцией `Форм Flux`, то, что лежит в истоке всего, что делает Flux.
+* [Outlets and Pipes - розетки и провода](OutletsAndPipes.md) **Начиная с Flux 7.0.0**.
+  Специфичная идея, которая может использоваться в увязке с `Контроллерами Flux`, либо `Провайдерами`. Проще всего представить
+  в виде двух специальных типов классов, которые в связке проводят данные сквозь серию входных и выходных `розеток - Pipes` для
+   их проверки, преобразования, манипуляции, хранения, отправки, журналирования, публикации (и много другого!) из любого
+   ресурса к любому потребителю.
 
-## API levels
+## Слои API
 
-The handful or so of concepts that Flux introduces can be divided into _levels_, each _level_ increasing the complexity and also
-the flexibility. The documents in this section of the documentation mention the _API level_ of a feature - here is what those
-levels mean:
+Те немногие концепции, которые вводит Flux, можно разделить на _слои_ в порядке возрастания сложности и гибкости. В
+документации этого раздела будет использоваться понятие _слоя API_ функции, и вот, что это значит:
 
-1. The outer layer, **layer 1**: ViewHelpers, TypoScript, template files. Low complexity.
-   Basically this layer contains _form field setups, configuration and rendering_ and is the simplest layer. It is used by site
-   integrators to influence where to look for template files, for example. And by template designers and developers to define a
-   collection of form fields that are available when editing custom content elements, pages, etc.
-2. The inner layer, **layer 2**: Classes, Controllers, Services - "internals". Medium complexity.
-   The more advanced ways you can integrate with Flux are opened up in PHP - they are (generally speaking) not available to be
-   used through TypoScript or in Fluid templates. Since this layer uses PHP only, it requires a fair bit of knowledge about making
-   Extbase classes (or a brain tuned perfectly to learning by example, because there are plenty examples in TYPO3 на базе Fluid's
-   extensions in the form of features like `fluidpages`).
-3. The core layer, **bottom layer**: For experienced developers. High to very high complexity.
-   This layer is normally one you never have to touch. There are almost no features as such at this layer, but there are ways to
-   influence Flux's logic in very advanced ways.
+1. Внешний слой, **слой 1**: ViewHelpers, TypoScript, файлы шаблонов. Небольшая сложность.
+   По большей части этот слой содержит _настройки полей форм, конфигурацию и вывод_, это простейший слой. Он используется
+   интеграторами сайтов в форме, например, указания местоположения файлов шаблонов. Дизайнерами шаблонов и разработчиками для
+   определения набора полей форм, доступных при редактировании элементов содержимого, страниц и тому подобного.
+2. Внутренний слой, **слой 2**: классы, контроллеры, сервисы - "внутренности". Средняя сложность.
+   Более развитые способы интеграции с Flux открываются при использовании PHP, вообще говоря,
+   они не предназначены для доступа из TypoScript, либо из шаблонов Fluid. Так как этот слой использует лишь PHP,
+   он требует дополнительных знаний о создании классов Extbase (либо отличную способность обучения на примерах,
+   так как существует множество примеров расширений TYPO3 на базе Fluid в виде функционала, вроде `fluidpages`).
+3. Слой ядра, **нижний слой**: для опытных разработчиков. Высшая степень сложности.
+   Обычно этот слой не затрагивается. Почти нет функционала, касающегося этого слоя, но так можно влиять на логику Flux
+   сверхтонким образом.
 
-You can build very advanced sites using only **layer 1** features like `fluidcontent`, `vhs` and `fluidpages`. You can make some
-advanced extensions using **layer 2** features like [Providers](Providers.md) and [Outlets/Pipes](OutletsAndPipes.md). And finally
-you can manipulate almost everything integrated in **layer 1** and **layer 2** by practicing the dark arts of the **bottom layer**.
+Можно создавать очень сложные сайты, используя возможности только лишь **слоя 1**, вроде `fluidcontent`,
+`vhs` и `fluidpages`. Можно сделать и некоторые более сложные расширения, воспользовавшись возможностями **слоя 2**, вроде
+[Провайдеров](Providers.md) и [Розеток/проводов](OutletsAndPipes.md). И наконец, возможно управлять практически всем,
+интегрированным в **слой 1** и **слой 2** через чёрную магию **нижнего слоя**.
 
-In daily work though, we don't speak of _API levels_ as such - we simply mention the integration context (template, controller,
-TypoScript, etc). However, it is used in this section of the documentation to give you a very fast way to see _how difficult it
-would be to learn and to use a certain feature at your skill level_.
+В повседневной работе мы не говорим о _слоях API_ как таковых, просто говорим о контексте интеграции (шаблон, контроллер,
+TypoScript, и т. п.). Но это понятие используется в этом разделе документации, чтобы было возможно быстро оценить,
+_насколько быстро и сложно можно научиться использовать определенный функционал при определенном уровне знания_.

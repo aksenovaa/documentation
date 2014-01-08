@@ -1,31 +1,32 @@
-TYPO3 на базе Fluid: Concepts - Templates
-=========================================
+TYPO3 на базе Fluid: концепции - шаблоны
+========================================
 
-## Foreword
+## Введение
 
-Templates rendered through Flux - which almost all templates in TYPO3 на базе Fluid are - are only slighly different from normal
-Fluid templates. This concept description focuses on the differences and only mentions the rough outlines of many settings and
-ViewHelpers which you can use to configure your templates. You should be at least somewhat familiar with how to use Fluid
-templates in Extbase extensions before reading this.
+Шаблоны, формируемые с использовнием Flux, то есть почти все шаблоны для TYPO3 на базе Fluid, лишь немногим отличаются от обычных
+шаблонов Fluid. В этом описании концепции акцент сделан на различиях, и лишь очерчены многие настройки и проекторы
+(ViewHelpers), которые могут использоваться для настройки шаблонов. Поэтому, перед чтением материала ниже,
+необходимо хотябы вкратце ознакомиться с тем, как использовать шаблоны Fluid в расширениях на Extbase.
 
-This chapter deals only with best practice. There are multiple ways to use templates with Flux, each equally valid and functional,
-but only one is considered best practice: [the Provider Extension](ProviderExtensions.md) which use the `FluidTYPO3\Flux\Core`
-class to register which types of templates the Provider Extension contains.
+Эта концепция описывает лишь передовой опыт. Существует множество способов использования шаблонов с Flux,
+каждый из которых имеет право на существование, но лишь один считается передовым: [расширение поставщик](ProviderExtensions.md)
+, использующее класс `FluidTYPO3\Flux\Core` для регистрации информации о том, какие типы шаблонов имеются в расширении поставщике.
 
-### API level 1
+### Слой API 1
 
-This concept is one of the easiest to learn and use in everyday work. It requires almost no knowledge of TYPO3 and involves almost
-no PHP code. It deals with template files and basic configuration files.
+Эта концепция - одна из простейших для изучения, и используется в повседневной работе. Она почти не требует знаний о TYPO3,
+и почти не имеет дело с кодом PHP. Она связана с файлами шаблонов и основными файлами настроек.
 
-## What is a Flux template?
+## Что такое шаблон Flux?
 
-A template file which can be used by Flux is exactly the same as a normal fluid template with requirements:
+Файл шаблона, используемый Flux точно такой же, как и обычный файл шаблона fluid, со следующими требованиями:
 
-1. The namespace `{namespace flux=FluidTYPO3\Flux\ViewHelpers}` must be present.
-2. There must be a `Configuration` section created using `f:section`.
+1. Должна быть обозначена область имен (namespace) `{namespace flux=FluidTYPO3\Flux\ViewHelpers}`.
+2. Должен присутствовать раздел `Configuration`, созданные посредством тега `f:section`.
 
-Inside the `Configuration` section (or whichever name you chose, in case you chose not to follow conventions) you should place
-a `flux:form` tag containing at least an `id` attribute which should have a `lowerCamelCase` value, for example `specialImage`.
+Внутри раздела `Configuration` (или с другим названием, если не следовать принятым соглашениям) необходимо поместить тег
+`flux:form`, с указанием по крайней мере атрибута `id`, значение которого должно быть в `нижнемГорбатомСинтаксисе`, например,
+`specialImage`.
 
 There is an optional section you can add when your Flux template is going to be used with the `tt_content` table - the section
 called `Preview` (again, added using `f:section`) can contain HTML output that is displayed in the page module in TYPO3 when you
