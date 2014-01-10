@@ -28,22 +28,23 @@ TYPO3 на базе Fluid: концепции - шаблоны
 `flux:form`, с указанием по крайней мере атрибута `id`, значение которого должно быть в `нижнемГорбатомСинтаксисе`, например,
 `specialImage`.
 
-There is an optional section you can add when your Flux template is going to be used with the `tt_content` table - the section
-called `Preview` (again, added using `f:section`) can contain HTML output that is displayed in the page module in TYPO3 when you
-view that particular record. This works automatically for Flux-enabled plugins (which includes but is not limited to elements
-for use in `fluidcontent`).
+Существует необязательный раздел, который можно добавить при использовании шаблона Fluid с таблицей `tt_content` - `Preview`
+(опять же, добавляется посредством тега `f:section`), где можно разместить HTML, выводимый в моделе Страница (Page) внутреннего
+ интерфейса TYPO3 при просмотре этой записи. Это автоматически работает для дополнений, использующих Flux (включая элементы,
+ работающие с `fluidcontent`).
 
-The final convention - which you *should* follow for transparency but which *can* be ignored when necessary, is to name the
-section which contains the actual output rendering for the frontend, `Main` - this section gets rendered from the Layout you use,
-which means you can of course choose a different name if that makes sense. Using the name `Main` simply means other people will
-immediately know the purpose of that section.
+И последнее соглашение, которому *нужно* следовать для упрощения работы, но которое *можно* при необходимости проигнорировать -
+ название раздела, отвечающего за фактический вывод содержимого на страницы сайта, должно быть `Main`. Этот раздел (section)
+ формируется из используемого макета (Layout), то есть, при необходимости для него можно выбрать и другое название. Но
+ используя название `Main` упрощает работу с шаблоном для других - они будут знать, для чего нужен это раздел.
 
-> #### Customisation option
+> #### Индивидуальные настройки
 >
-> The `Configuration` section name can be changed in your custom [Provider class](Providers.md). You can also use multiple sections
-> and let your Provider switch between them based on, for example, a value from the record or from TypoScript, user session etc.
+> Название раздела (section) `Configuration` можно изменить в своем [классе провайдера](Providers.md). Также можно использовать
+ несколько разделов (section), и переключаться между ними в провайдере на основе, например, значения в записи или TypoScript,
+ сессии пользователя и т. п.
 
-An extremely minimal template example (example: `fluidcontent` element template):
+Пример экстримально минимального шаблона (пример: шаблон элемента `fluidcontent`):
 
 ```xml
 {namespace flux=FluidTYPO3\Flux\ViewHelpers}
@@ -56,67 +57,70 @@ An extremely minimal template example (example: `fluidcontent` element template)
 </f:section>
 ```
 
-As you can see, this minimal example fulfills only the two main requirements above and uses name conventions for the Layout which
-we describe in the next chapter. If added to a `fluidcontent` template collection, this template would result in one new content
-element type named "myContentElement" which has no extra form fields, no special icon, no human-readable label and when rendered,
-displays a simple "My content element" text without any HTML container element.
+Как видите, минимум необходимого в соответствие двух основным требованиям выше и использование соглашения об именовании для
+макета (Layout), которое будет объяснено в следующей главе. При добавлении в коллекцию шаблонов `fluidcontent`,
+этот шаблон реализует тип элемента под названием "myContentElement" без каких-либо настроек, значка, меток,
+а при выводе будет просто выводить текст "My content element" без всякого контейнера HTML.
 
-## Layouts and Partials
+## Layouts - макеты и Partials - шаблонные фрагменты
 
-Just like in any other Fluid template you can use any Layout name you choose. We on the TYPO3 на базе Fluid team suggest you use
-the names `Default`, `Content`, `CoreContent` and `Page` as needed. This list shows when to use which name:
+Как в любых других шаблонах Fluid, здесь можно использовать любое желаемое название для макета (Layout). Но в TYPO3 на базе
+Fluid желательно использовать названия `Default`, `Content`, `CoreContent` и `Page`. Ниже разъясняется когда и какое название
+нужно использовать:
 
-* `Page` when the Layout is to be used with Page templates through `fluidpages`. It is suggested that all page templates share a
-  common Layout file, but sometimes you need to add other Layouts, in which case names like `FrontPage` and `SubPage` and so on,
-  will make a lot of sense to use.
-* `Content` when the Layout is for `fluidcontent` elements - normally, you only need one Layout for content elements but like Page
-  templates, you can split content element layouts into fx `MediaContent`, `TextContent` etc. Layout files.
-* `CoreContent` when the Layout is for `fluidcontent_core` elements. You should not ever diverge from this convention for this
-  particular extension - consistency and with it predicactability is **very** important for core content templates.
-* `Default` when for example all your Layout file contains is an `<f:render />` statement rendering one section. If your Layout
-  HTML is this simple, sharing a Layout file gives you a small performance boost and increases transparency - compiling one file
-  is naturally faster than multiple files, and having one file to look at greatly increases your chance to find the right one ;)
+* `Page` при использовании макета (Layout) с шаблонами страниц посредством `fluidpages`. Предполагается,
+   что все шаблоны страниц используют общий файл макета (Layout), хотя иногда необходимы и другие макеты (Layout) с названиями
+   вроде `FrontPage`, `SubPage` и т. п., в соответстве с собственными предпочтениями.
+* `Content`, когда макет (Layout) предназначен для элементов `fluidcontent` - обычно для всех элементов нужен лишь один макет
+   (Layout), но, как и для страниц, можно разделять макет на, например файлы `MediaContent`, `TextContent` и т. п.
+* `CoreContent`, когда макет (Layout) предназначен для элементов `fluidcontent_core`. Именно в этом расширении соблюдение этого
+  правила **очень** важно для элементов содержимого ядра.
+* `Default`, когда, например, все содержимое файла макета (Layout) имеют лишь `<f:render />` указание на формирование одного
+  раздела (section). Если макет (Layout) HTML настолько прост, то общий файл макета даст небольшой прирост производительности и
+   повышает прозрачность - компиляция одного файла быстрее, чем нескольких, и запутаться в поиске при в одном файле просто
+   невозможно ;)
 
-Other than these naming conventions there are no particular rules or recommendations for Layouts set by TYPO3 на базе Fluid. It is
-completely up to you as developer/designer to decide what, if anything, your Layouts should contain.
+Помимо правил именования, для макетов (Layout) более нет правил или рекомендаций со стороны TYPO3 на базе Fluid. И только вы,
+как разработчик, можете решать, что, если это нужно, будет в макетах.
 
-Partials are completely free to be used whenever you want, for whatever you want. They can contain shared Previews, common Flux
-form fields, Grid definitions etc. - you simply have to place an `f:render` statement in the right place to "include" those.
+Шаблонные фрагменты - Partials не имеют ограничений по своему наполнению. Они предназначены для повторяющихся предпросмотров,
+общих полей форм Flux, определений сеток и т. п., необходимо лишь поместить тег `f:render` в нужное место, чтобы их "подключить".
 
-## View path definitions in TypoScript
+## Определение пути для режима (View) в TypoScript
 
-Flux will automatically look in the default template paths - even if you don't add any configuration - but you can (and indeed you
-should) add your View configuration as TypoScript. You do this the same way you do it for any Extbase/Fluid extension so we won't
-cover that here. You can find a bit more information about this particular TypoScript in the [ProviderExtension concept](ProviderExtensions.md).
+Flux автоматически ищет шаблоны по в местоположении по умолчанию, даже если не добавлять никаких настроек,
+но можно (и даже нужно) добавить свою настройку для режимов (View) через TypoScript. Производится это точно также,
+как и для любых других расширений Extbase/Fluid, и здесь об этом не рассказывается. Дополнительную информацию об этих
+настройках в TypoScript говориться в [концепции расширений поставщиков](ProviderExtensions.md).
 
-Flux-enabled extensions will like any Extbase extension find template paths setup in `plugin.tx_yourextwithoutunderscores.view`.
+Расширения, использующие Flux, как и любые другие расширения на Extbase, ищут шаблоны в `plugin.tx_yourextwithoutunderscores.view`.
 
-Changing the view paths in TypoScript affects Flux just like it would affect any other extension. Flux will look in the new path
-instead of the old one. Here it is worth noting that you can use so-called template path "overlays" - you can read more about how
-these are set up, in [the documentation for EXT:view about path overlays](https://github.com/FluidTYPO3/view#template-path-overlays).
-The same procedure is supported by `fluidcontent`, `fluidpages` etc. - and indeed, any extension in which you use Flux gets this
-support without the need to install EXT:view. To get overlay capabilities for non-Flux extensions, simply install EXT:view and
-follow the same procedure.
+Изменение настроек через TypoScript для таких путей также влияет на Flux, как и на другие расширения. Flux берет во внимание
+новый путь, вместо старого. Стоит отметить, что возможно использовать пути-накладки, а как это сделать,
+можно прочитать в [документации по EXT:view по путям-накладкам](https://github.com/FluidTYPO3/view#template-path-overlays). То
+же справедливо для `fluidcontent`, `fluidpages` и т. е. - любом расширении с использованием Flux это поддерживается, без
+необходимости установки  EXT:view. Для поддержки наложения в не Flux расширениях, просто установите EXT:view,
+и все станет также.
 
-### Alternative to templates
+### Альтернатива шаблонам
 
-> Careful! Some features from TYPO3 на базе Fluid will require template files containing a `Configuration` section and a
-> `flux:form` tag. While it is possible to get around even this requirement, it involves creating a custom Provider to take the
-> place of a Provider included with the extension, e.g. `fluidcontent` ContentProvider, `fluidpages` PageProvider, and so on.
-> By replacing Providers you can change almost all aspects of how a certain feature works, fitting it to your site in exactly the
-> right way. We designed the API so that features like `fluidcontent` all have the exact same level of API access that your own
-> Providers do, which means anything these extensions can do yours can, too.
+> Внимание! Некоторый функционал из TYPO3 на базе Fluid требует, чтобы в файлах шаблонов был раздел `Configuration` и тег
+> `flux:form`. Хотя возможно обойти и это требование, создав свой класс Provider вместо включаемого через расширение, например,
+> `fluidcontent` ContentProvider, `fluidpages` PageProvider, и так далее. Замена провайдера решает все вопросы,
+> включая решения по работе функционала относительно конкретного сайта. Разработка API делалась в расчете на то,
+> чтобы весь функционал, вроде `fluidcontent`, имел бы тот же уровень доступа к API, что и пользовательские провайдеры. То есть, то,
+> что могут эти расширения, точно сможете сделать и вы самостоятельно.
 
-Note that there is an alternative to placing your form and fields inside the template. When you use a custom [Provider](Providers.md)
-class you can have this class return PHP objects directly from the `getForm` and `getGrid` methods. Your Provider will have
-inherited those two methods from Flux's `AbstractProvider` class - and in the code inherited from Flux, your Provider will by
-default look into the template file for a Form and Grid instance. When you override either of these methods, reading the Form and
-Grid respectively, does not have to require reading a template file.
+Имейте ввиду, что существует альтернатива рамещению формы с полями внутри шаблона. При использовании своего класса [Provider]
+(Providers.md), можно возвращать из него объекты PHP непосредственно из методов `getForm` и `getGrid`. Ваш провайдер наследует
+эти два метода из класса Flux `AbstractProvider`, благодаря чему, собственный провайдер будет способен выискивать в файле
+шаблона экземпляры Form и Grid. Переназначение любого их этих методов, то есть, чтение Form и Grid, соответственно,
+не потребует чтения самого файла шаблона.
 
-What this means is that if you return native PHP objects from a Provider for both the Form *and* Grid instances, your template
-file itself no longer is required to contain a `Configuration` section and any `flux:form` definition. Your Provider can even
-return a raw HTML preview - which when done, lets you skip the `Preview` section as well. Of course, Previews only apply to
-`tt_content` records as already mentioned.
+А это означает, что при возвращении сырых объектов PHP из экземпляра провайдера Form *и/или* Grid,
+в самом файле шаблона становится не нужным более раздел (section) `Configuration` и любое определение `flux:form`.
+Разработанный вами провайдер может даже возвращать напрямую HTML, что позволяет обойти также раздел `Preview`. Конечно,
+упомянутый раздел `Previews` применим лишь к записям `tt_content`.
 
-To learn more about your options in this area you should read the [Provider class concept](Providers.md). Note that Providers
-belong in the **layer 2** API and as such are harder to learn than using simple templates.
+Дополнительную информацию по этой области можно почерпнуть из [концепции класса провайдера](Providers.md). Обратите внимание,
+что провайдеры относятся к **слою 2** API, ввиду чего, сложнее для изучения, чем обычные использование обычных шаблонов.

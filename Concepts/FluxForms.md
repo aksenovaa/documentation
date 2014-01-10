@@ -7,7 +7,7 @@ This document describes in detail what the `Flux Form` concept means and how it 
 be used if you are starting out - if you are new to Flux, start with our [introduction](../Introduction.md), which introduces the
 concepts in a much softer, more readily grasped format.
 
-### Слой APIs 1 and 2
+### Слои API 1 и 2
 
 This concept is available for use in Fluid templates, in TypoScript and in PHP. The Fluid and TypoScript aspects can be classified
 as **layer 1** while the PHP based API should be classified as **layer 2** since processing it involves using one or more concepts
