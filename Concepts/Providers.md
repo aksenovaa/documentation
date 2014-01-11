@@ -1,28 +1,30 @@
-TYPO3 на базе Fluid: концепции -Providers
-=========================================
+TYPO3 на базе Fluid: концепции - провайдеры
+===========================================
 
 ## Введение
 
-The Provider class is one of the more complex concepts used in Flux. It is opened up for "public" use since features such as
-`fluidpages` and `fluidcontent` use this API themselves as a way to use advanced Flux features but do so through a limited API.
-When you yourself use a Provider, it opens up ways to integrate with Flux which are similar to what `fluidcontent` does - based
-on a particular type of record, making some aspects of rendering (fx which template file to use) dynamic based on values that are
-set in the record.
+Класс провайдера - одна из наиболее сложных концепций, используемых во Flux. Она открыта для "публичного" использования с тех
+пор, как `fluidpages` и `fluidcontent` сами используют эту API, как возможность воспользоваться передовыми функциями Flux,
+но делают они это через посредством ограниченной API. Если вы сами воспользуетесь повайдером, то откроются способы интеграции с
+Flux, схожите с тем, что происходит во `fluidcontent` - на основе конкретных типов записей,
+делая некоторые аспекты вывода (например, указание использования файла шаблона) динамическими,
+на основе установленных в записях значениях.
 
 ### Устранение неоднозначности
 
-The concept of [Provider Extensions](ProviderExtensions.md) (this document) should not be confused with the concept of
-[Providers](Providers.md). The Provider extensions concept is about file structure, the Provider concept is about a type of class.
+Концепцию [расширений поставщиков (Provider Extensions)](ProviderExtensions.md) нельзя путать с концепцией [Провайдеров]
+(Providers.md) (этот документ). Концепция раширений поставщиков говорит о структуре файлов, а концепция Провайдеров -
+о типе класса.
 
 ### Слой API 2
 
-This concept is slightly more advanced than **layer 1** concepts; understanding it involves a basic PHP background knowledge and
-some basic knowledge about Extbase extensions, making PHP classes and using a PHP class API in general (extending classes, calling
-methods - along those lines).
+Эта концепция слегка сложнее, чем концепции **слоя 1**; её понимание требует базовых знании PHP и расширений Extbase,
+создание классов PHP и использования общего API классов PHP (дополнение - extending классов,
+вызов методов и многое другое в том же роде).
 
-## What is a Provider?
+## Что такое провайдер (поставщик)?
 
-A provider is a class which:
+Провайдер - это класс, который:
 
 1. Is always associated with one database table, fx `tt_content` or `pages` or your custom tables (one Provider per table).
 2. Is resolved through Flux whenever a record from that table is edited, moved, saved, deleted, rendered etc.

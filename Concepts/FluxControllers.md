@@ -3,26 +3,28 @@ TYPO3 на базе Fluid: концепции - контроллеры
 
 ### Слой API 2
 
-This concept is slightly more advanced than **layer 1** concepts; understanding it involves a basic PHP background knowledge and
-some basic knowledge about Extbase extensions, making PHP classes and using a PHP class API in general (extending classes, calling
-methods - along those lines).
+Эта концепция слегка сложнее, чем концепции **слоя 1**; её понимание требует базовых знании PHP и расширений Extbase,
+создание классов PHP и использования общего API классов PHP (дополнение - extending классов,
+вызов методов и многое другое в том же роде).
 
-### What is a Flux-enabled Controller?
+### Что такое управляемые Flux контроллеры?
 
-There is not much difference between a standard Extbase plugin "Action Controller" and a Flux-enabled controller. The hint lies in
-the name "-enabled" which means a _Flux-enabled controller is simply an extended controller with a few added behaviors_:
+Нет большой разницы между обычным Extbase дополнение "Контроллер действий - Action Controller" и управляемым Flux контроллером.
+ Подсказка в слове "управляемый", то есть _управляемый Flux контроллер просто дополняет (extended) контроллер несколькими
+ поведениями_:
 
-* A [Provider](Providers.md) is resolved by Flux and made available in the controller.
-* The View class is different; allowing (ViewHelperVariableContainer-)variables to be read from specific sections.
-* Several initialisation methods have been added, allowing for example common template variables to be added.
-* Delegation to other controller classes is possible.
+* [Провайдер](Providers.md) разрешается Flux и становиться доступным в контроллере.
+* Другой класс View; возможность читать (ViewHelperVariableContainer-)переменные из определенных разделов (sections).
+* Добавлено несколько методов инициализации, позволяющие добавлять, например, общие переменные для шаблона.
+* Возможно делегирование другим классам контроллерам.
 
-Other than these additions this type of controller class is a standard controller: it supports arguments, property mapping,
-validation, redirection etc. just like all other controller types.
+Помимо этого, этот класс контроллера является обычным - поддерживает аргументы, разметку свойств, проверку,
+перенаправление и т. п. - все то же, что и другие типы контроллеров.
 
-### Why use a Flux controller base?
+### Зачем использовать контроллер Flux?
 
-You can opt to use a Flux-enabled controller whenever you want your controller to work more closely with your Provider class. Using
-the controller base gives you automatic access to the Provider and lets the Provider deliver view variables and more. While you are
-not required to use this controller base, it makes it easier to implement many view-related features. You can get the same result
-by manually making your Provider instance and calling methods to read variables, template paths and other settings.
+Выбирайте использование управляемого Flux контоллера для более плотной работы с классом провайдера. Использование этого
+контроллера дает автоматический доступ к провайдеру и позволяет провайдеру предоставлять переменные режимов (view) и многое
+другое. Можно и не использовать этот контроллер, как основной, что упрощает реализацию многих функций для режимов (view). Можно
+ добиться того же результата, создав множество экземпляров своего провайдера и вызывая методы для чтения переменных,
+ путей к шаблону и других настроек.
