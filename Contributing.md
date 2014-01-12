@@ -1,22 +1,23 @@
 Добро пожаловать, автор!
 ========================
 
-On behalf of the entire TYPO3 на базе Fluid team, thank you for wanting to contribute to our
-projects - by creating issues, pull requests or just asking great support questions which
-can help other users in the future.
+От имени всей команды разработчиков TYPO3 на базе Fluid, благодарим Вас за желание внести вклад в наши проекты - путём
+публикации вопросов, запосов pull или просто путём решения возникающих проблем со службой поддержки,
+что может в будущем помочь другим пользователям.
 
-This is the *ultra-compact* guide for that.
+Вот *ультра компактное* руководство для этого.
 
-The following diagram shows our branch structure and how we work with them regarding commits,
-merges and release preparation. You can also see which type of commit (for example, your
-commits that you add and request that we merge) should go into which branch. Briefly put, you
-should place bug fixes in the "staging" branch for the version to which your fix applies - and
-you should create new features in the "development" branch. You can pull the "master" branch
-and use it safely in production - it will always contain the most recent TER release state.
+На следующей диаграмме приведена вся структура приложений и порядок работы с ними в отношении фиксаций/commits,
+объединения/merges и подготовки к публикации/release. Также можно посмотреть, какой тип фиксации/commit (например,
+ваша фиксация/commits, добавленная с запросом к нам на объединения/merge) должен производиться и в какой ветви. Вкратце,
+исправление ошибок (bug fixes) необходимо помещать в ветвь "staging" версии, для которой применяется это исправление,
+а создавать новый функционал нужно в ветви "development". Ветвь "master" можно загрузить/pull и безопасно использовать на
+рабочих сайтах - в ней всегда находится последняя версия из TER.
 
-![FluidTYPO3 Git Workflow diagram](Images/GitFlowDiagram.png)
+![Диаграмма рабочего процесса FluidTYPO3 Git](Images/GitFlowDiagram.png)
 
-## Submitting Issues - Feature Requests, Bug Reports, Support Questions...
+## Отправка сообщени о проблемах (Submitting Issues) - запросы о новом функционале (Feature Requests),
+сообщения об ошибках (Bug Reports), вопросы к поддержке (Support Questions)...
 
 You have heard all this before, but just in case:
 
