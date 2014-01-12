@@ -17,7 +17,7 @@
 ![Диаграмма рабочего процесса FluidTYPO3 Git](Images/GitFlowDiagram.png)
 
 ## Отправка сообщени о проблемах (Submitting Issues) - запросы о новом функционале (Feature Requests),
-сообщения об ошибках (Bug Reports), вопросы к поддержке (Support Questions)...
+## сообщения об ошибках (Bug Reports), вопросы к поддержке (Support Questions)...
 
 You have heard all this before, but just in case:
 
