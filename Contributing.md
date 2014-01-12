@@ -19,44 +19,40 @@
 ## Отправка сообщени о проблемах (Submitting Issues) - запросы о новом функционале (Feature Requests),
 ## сообщения об ошибках (Bug Reports), вопросы к поддержке (Support Questions)...
 
-You have heard all this before, but just in case:
+Вы слышали все это раньше, но на всякий случай:
 
-* Before submitting bugs, make sure the bug you are reporting...
-  - Is not already fixed (if in doubt: the Git master branch is always up-to-date)
-  - Is not currently reported and/or under review
-* When submitting bugs, include information about what you wanted to achieve and which errors
-  or messages (reminder: error log messages are worth a thousand words) you encountered.
+* Передо созданием сообщения об ошибке, убедитесь, что ошибка, о которой вы сообщаете...
+  - еще не исправлена (если сомневаетесь: ветвь Git master всегда актуальна);
+  - уже не была замечена и о ней еще не сообщалось.
+* Сообщая об ошибках, укажите информацию о ваших целях, и о том, какие ошибки или сообщения (помните: сообщения в журнале
+  ошибок красноречивее тысячи слов) вы получали.
 
-In short: We want to trust that your report is valid and contains helpful information. This
-allows us to be most efficient when assisting or fixing the problem; everything runs smoother.
+Вкратце: нам должно быть понятно, что сообщение актуально и содержит полезную информацию. Это позволит эффективнее решить
+возникшую проблему - все просто
 
-## Making Pull requests
+## Оформление запросов Pull
 
-Please make sure, you read the entire [Contribution Guide][contributionGuide] in advance.
+Убедитесь, что полностью прочитали и усвоили [руководство по содействию][contributionGuide].
 
-We need to stress how important it actually is to contribute in feature-branches. This allows
-you to keep your copy of flux in the master branch clean and to be the same as in our repository.
-Start of by issueing ``git checkout -b myCoolFeature``.
+Необходимо подчеркнуть, как на самом деле важно содействие в ветвях по функционалу. Это позволяет сохранять чистоту в своей
+копии flux в ветви master, также, как и в нашем репозитории. Начинайте сообщение ``git checkout -b myCoolFeature``.
 
-Make one commit per change and one change per commit only. Example: if you are going to create
-a particular feature and this feature requires a few changes to existing code to prepare for
-the feature, first make individual commits with the required changes and then create your
-"real" work on top of this.
+Делайте лишь один commit для каждого изменения и лишь одно изменение в каждом commit. Пример: если вы собираетесь создать
+частичную функцию, которая требует нескольких изменений в существующем коде для подготовки грядущих функций,
+сначала проведите несколько индивидуальных commits с требуемыми изменениями, а затем проведите "настоящую" работу поверх этого.
 
-So, you have prepared a nice bugfix to the latest version of flux and want that to be available
-to anybody? Great! As we assume, you consumed the [Contribution Guide][contributionGuide]
-to make your contribution follow best practices, everything should be fine.
+Итак, вы подготовили отличное исправление ошибки в последней версии flux, и хотите, чтобы оно стало доступным для всех?
+Превосходно! Мы думаем, что вы уже прочитали [руководство по содействию][contributionGuide],
+чтобы ваш вклад соответствовал передовому опыту, поэтому все должно пройти отлично.
 
-In reality, we tend to be very picky concerning commit messages and our CGL. - Sir Travis
-is also. He checks every commit message and wants to make sure, you applied the CGL to your
-code. So what if he-or we-complain about findings in your code? Let us try to explain by
-example:
+На самом деле, мы очень ответственно относимся к сообщениям commit, также, как и наш CGL - сэр Travis. Мы проверяем каждое
+сообщение commit, чтобы убедиться, что в вашем коде учитывалось CGL. Что, если у него или у нас возникают сомнения в коде?
+Попытаемся объяснить на примере.
 
-### Example: The wrong commit message
+### Пример: сообщение об ошибках при commit
 
-So you hit the "wrong commit message" issue and we "force" you to change your commit
-message(s). What now? GIT is magic but not that easy to learn. Lets say you have 2 commits.
-This is what it would look like in the Pull-Request:
+Итак, вы получили "wrong commit message" и мы "заставляем" вас изменить свое сообщение(я) о commit. Что теперь? GIT - это
+волшебство, но непростое. Представьте, что имеется 2 commits. И вот как это будет выглядеть в Pull-Request:
 
 ```
 Author - Message (commit hash)
@@ -65,11 +61,10 @@ Cedric Ziel - a lead-haxor addition to flUx! (aaaaa)
 Cedric Ziel - Fixing a docs-issue (bbbbb)
 ```
 
-What's wrong? You know it-because you read the [guide][contributionGuide]! The commit
-(I reference them by hash) aaaaa is lacking a prefix and an uppercase letter at the
-beginning.
+Что не так? Все понятно, ведь вы читали [руководство][contributionGuide]! Commit (я ссылаюсь на него по hash) aaaaa не имеет
+префикса и в начале есть заглавная буква.
 
-The optimal structure would be:
+Оптимальна структура будет такой:
 
 ```
 Author - Message (commit hash)
@@ -78,9 +73,9 @@ Cedric Ziel - [FEATURE] New property x added
 Cedric Ziel - [DOC] Documenting feature y
 ```
 
-So you need to ``reword`` (git slang) your last two commits.
+Вам необходим ``reword`` (изменить формулировку - сленг git) двух последних commits.
 
-To do this, you need to issue a ``rebase``:
+Для этого, необходимо сообщить о ``rebase``:
 ```
 git rebase -i HEAD~2 # this will issue an interactive rebase of the last 2 commits off from HEAD
 # an editor will come up, showing your last 2 commits, change the first words from pick to reword
@@ -94,14 +89,14 @@ git push --force $GITHUBREMOTE $FEATUREBRANCHNAME
 # The changes will shop up here immediately and Travis will try to build again
 ```
 
-### Example: Refreshing your GitHub fork
+### Пример: обновление своей GitHub fork
 
-As time goes by, you will certainly need to refresh your repo by pulling in remote changes.
+Время от времени, безусловно, необходимо обновлять свой репозиторий, вытягивая (pulling) изменения.
 
-For the sake of simplicity, we call the original FluidTYPO3 repositories our ``upstream`` remote.
+Для упрощения, мы называем оригинальные репозитории FluidTYPO3 нашим ``upstream - истоком``.
 
-To be able to actually refresh your fork, you could either delete it, or pull changes directly via
-git. We recommend to do the following:
+Для фактического обновления своей вилки/fork, необходимо либо удалить ее, либо вытянуть/pull изменения непосредственно через git.
+Мы рекомендуем следующее:
 
 ```
 # Add the upstream repo as git remote
@@ -113,11 +108,11 @@ git pull --rebase upstream master
 # Up to date, yeah-unicorns everywhere!
 ```
 
-We recommend to do this everytime you are about to start a new feature branch.
+Мы рекомендуем делать это всякий раз, при создании ветви с новым функционалом.
 
-The full guide is available at http://fedext.net/overview/contributing/contribution-guide.html
+Полное руководство доступно на http://fedext.net/overview/contributing/contribution-guide.html
 
-Last words: welcome to the growing list of contributors! :)
+Напутствие: добро пожаловать в растущую гвардию участников! :)
 
 [contributionGuide]: https://github.com/FluidTYPO3/flux.git "FluidTYPO3 contribution guide"
 [pomodoro]: http://www.pomodorotechnique.com/ "The Pomodory Technique"
