@@ -4,20 +4,22 @@
 
 ### Назначение: каркас сайта без необходимости редактирования файлов шаблона
 
-**Not intended for production use** - designed for development stage; allows content editors to start building site content in a
-blank TYPO3 site fully prepared to be switched over to use another template when it is ready.
+**Не предназначено для рабочего применения** - применяется на страдии разработки; позволяет редакторам содержимого начинать
+создавать содержимое сайта на пустом TYPO3 сайте, полностью подготовленному к переключению на использование другого шаблона по
+его готовности.
 
-This template is a very basic wireframe-style template which assigns a selectable number of content columns which can be used to
-insert content elements, along with an extremely basic menu starting with `entryLevel="0"`. Labels of content columns can be set
-and these labels are used as `data-name` attributes on the container element which gets rendered. Two additional fields allow
-adding **rudimentary, kickstart-quality** styles and scripts. For ease, a checkbox is provided which when toggled on, loads the
-most recent jQuery using a so-called CDN (outside hosting service, provided by Google).
+Этот шаблон - простейший каркасный, где можно назначить любой номер столбца содержимого для вставки в него элементов
+содержимого, наряду с самым простым меню, начинающимся с `entryLevel="0"`. Для столбцов содержимого можно назначить метки,
+используемые как атрибуты `data-name` в выводимых контейнерных элементах. Два дополнительных поля позволяют добавлять
+**рудиментарные начальные** стили и сценарии. Для простоты, предусмотрен флажок, при включении которого,
+загружается последняя версия jQuery посредством CDN (внешний хостинг сервис, предоставленный со стороны Google).
 
-When site exits wireframe stage you should disable this template to prevent it from being used on your site!
+По выходу сайта из каркасной стадии, этот шаблон необходимо отключить, чтобы предотвратить его использование на сайте!
 
 ### Исходные файлы
 
-Place as any file in your Provider Extension - for example `Wireframe.html` in `Resources/Private/Templates/Page/`.
+Разместите, как и любые другие файлы, в расширении поставщике (Provider Extension), например, `Wireframe.html` в
+`Resources/Private/Templates/Page/`.
 
 ```xml
 {namespace flux=FluidTYPO3\Flux\ViewHelpers}
